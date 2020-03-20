@@ -22,7 +22,7 @@ public class DAORisorse implements IDAO, IDAORisorse{
 
 	@Override
 	public int valoreRisorsa(String nomeRisorsa) {
-		String query = read.replace("*", "nome, valore").replace("tabella", "risorse").replace("id = [id]", "nome = '" + nomeRisorsa + "'");
+		String query = read.replace("*", "valore").replace("tabella", "risorse").replace("id = [id]", "nome = '" + nomeRisorsa + "'");
 		return Integer.parseInt(db.row(query).getValore()); 
 	}
 
