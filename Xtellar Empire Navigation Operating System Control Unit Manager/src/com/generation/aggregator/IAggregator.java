@@ -39,8 +39,6 @@ public interface IAggregator {
 
 	public String indirizzoDelNumero(int numero);
 
-	public Razza razza(String nome);
-
 	public String dettagliNumero(int numero);
 	
 	public int quantitaRisorsaImpero(String nomeRisorsa);

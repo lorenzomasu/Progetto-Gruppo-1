@@ -147,12 +147,6 @@ public class Aggregator implements IAggregator{
 	}
 
 	@Override
-	public Razza razza(String nome) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public String dettagliNumero(int numero) {
 		// TODO Auto-generated method stub
 		return null;
