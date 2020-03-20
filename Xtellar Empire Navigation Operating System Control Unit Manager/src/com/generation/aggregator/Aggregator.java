@@ -11,7 +11,7 @@ import com.generation.entities.Risorsa;
 public class Aggregator implements IAggregator{
 
 	IDAO daoesseri;
-	IDAO daopianeti;
+	IDAO daopianeti; 
 	IDAO daorazze;
 	IDAO daorisorse;
 	IDAO daorubrica;
