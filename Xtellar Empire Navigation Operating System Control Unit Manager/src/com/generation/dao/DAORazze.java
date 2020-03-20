@@ -1,7 +1,6 @@
 package com.generation.dao;
 
 import java.math.BigInteger;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -19,19 +18,10 @@ public class DAORazze implements IDAO, IDAORazze {
 	}
 
 	@Override
-	public List<Razza> esiste(String caratteristica) {
-		List<Razza> ris = new ArrayList<Razza>(); 
+	public List<Entity> esiste(String caratteristica) {
 		String query = read.replace("tabella", "razze").replace("id = [id]", "descrizione = '" + caratteristica + "'");
-		List<Map<String,String>> righe = db.rows(query); 
-		if(righe != null) {
-			for(Map<String,String> riga : righe)
-			{
-				Razza e = new Razza();
-				e.fromMap(riga);
-				ris.add(e);
-			}
-			return ris; 
-		}
+		if(list(query) != null)
+			return list(query); 
 		return null;
 	}
 
