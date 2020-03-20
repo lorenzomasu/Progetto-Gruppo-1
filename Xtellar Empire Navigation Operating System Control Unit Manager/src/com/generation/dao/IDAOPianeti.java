@@ -1,14 +1,16 @@
 package com.generation.dao;
 
-import com.generation.entities.*;
+import java.util.List;
+
+import com.generation.base.Entity;
 
 public interface IDAOPianeti {
 	
 	public int grandezzaMediaPianeti();
 	public int grandezzaTotalePianeti();
-	public String distanzaPianeti(Pianeta a, Pianeta b);
+	public String distanzaPianeti(String nomea, String nomeb);
 	public boolean doppione(String nome); //se un pianeta ha stesso nome di un altro
-	public Pianeta pianetaPiuGrande();
-	public Pianeta pianetaPiuPiccolo();
+	public List<Entity> pianetaPiuGrande();
+	public List<Entity> pianetaPiuPiccolo();
 
 }
