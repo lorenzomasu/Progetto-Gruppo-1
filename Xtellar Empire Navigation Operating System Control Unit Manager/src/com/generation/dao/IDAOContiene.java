@@ -1,5 +1,11 @@
 package com.generation.dao;
 
-public interface IDAOContiene {
+import java.util.List;
 
+import com.generation.base.Entity;
+import com.generation.entities.*;
+
+public interface IDAOContiene {
+	List<Entity> pianetiConRisorsa(Risorsa r);
+	List<Entity> risorseSuPianeta(Pianeta p);
 }

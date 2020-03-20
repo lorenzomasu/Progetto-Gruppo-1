@@ -63,9 +63,9 @@ public class DAOPianeti implements IDAO, IDAOPianeti{
 	
 	
 	@Override
-	public int grandezzaMediaPianeti() {
+	public double grandezzaMediaPianeti() {
 		String query = "select avg(grandezza) average from pianeti";
-		return Integer.parseInt(db.row(query).get("average"));
+		return Double.parseDouble(db.row(query).get("average"));
 	}
 	
 	@Override

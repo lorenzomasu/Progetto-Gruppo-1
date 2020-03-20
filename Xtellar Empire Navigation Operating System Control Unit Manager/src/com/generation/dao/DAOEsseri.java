@@ -7,7 +7,7 @@ import java.util.Map;
 import com.generation.base.Entity;
 import com.generation.base.SmartList;
 import com.generation.db.IDatabase;
-import com.generation.entities.Pianeta;
+import com.generation.entities.Essere;
 
 public class DAOEsseri implements IDAO, IDAOEsseri{
 	private IDatabase db;
@@ -22,7 +22,7 @@ public class DAOEsseri implements IDAO, IDAOEsseri{
 	{
 		List<Entity> ris = new SmartList<Entity>();
 		for(Map<String,String> riga : db.rows(filtro)) {
-			Entity e = new Pianeta();
+			Entity e = new Essere();
 			if(e!=null) {
 				e.fromMap(riga);
 				ris.add(e);
@@ -39,7 +39,7 @@ public class DAOEsseri implements IDAO, IDAOEsseri{
 
 	@Override
 	public Entity load(BigInteger id) {
-		Entity ris = new Pianeta();
+		Entity ris = new Essere();
 		ris.fromMap(db.row(read.replace("tabella",nometabella).replace("?", id+"")));
 		return ris;
 	}
