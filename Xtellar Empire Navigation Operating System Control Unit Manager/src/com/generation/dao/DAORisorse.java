@@ -14,6 +14,11 @@ public class DAORisorse implements IDAO, IDAORisorse{
 	
 	private IDatabase db; 
 
+
+	public DAORisorse(IDatabase db) {
+		this.db = db;
+	}
+
 	@Override
 	public double valoreMedioRisorse() {
 		String query = read.replace("*", "avg(valore) valMedio").replace("tabella", "risorse").replace("where id = [id]", ""); 
@@ -23,7 +28,9 @@ public class DAORisorse implements IDAO, IDAORisorse{
 	@Override
 	public int valoreRisorsa(String nomeRisorsa) {
 		String query = read.replace("*", "valore").replace("tabella", "risorse").replace("id = [id]", "nome = '" + nomeRisorsa + "'");
-		return Integer.parseInt(db.row(query).getValore()); 
+		Entity e = new Risorsa();
+		e.fromMap(db.row(query));
+		return ((Risorsa)e).getValore(); 
 	}
 
 	@Override
@@ -47,26 +54,38 @@ public class DAORisorse implements IDAO, IDAORisorse{
 
 	@Override
 	public Entity load(BigInteger id) {
-		String query = read.replace("tabella","risorse").replace("[id]",id+"");
-		Entity e = new Risorsa();
-		e.fromMap(db.row(query));
-		return e;
+		try {
+			String query = read.replace("tabella","risorse").replace("[id]",id+"");
+			Entity e = new Risorsa();
+			e.fromMap(db.row(query));
+			return e;
+		}catch(Exception exc) {
+			return null;
+		}
 	}
 
 	@Override
 	public Entity load(Entity e) {
-		Entity ris = null;
-		String query = "";
-		
-		if(e.getId() != null)
-			query = update.replace("tabella", "risorse").replace("[id]",e.getId()+"");
-		else
-			query = insert.replace("tabella", "risorse");
-		
-		Map<String, String> mappa = e.toMap();
-		BigInteger id = db.update(query,mappa);
-		ris = load(id);
-		return ris;
+		try{
+			Entity ris = null;
+			
+			String query = "";
+			
+			if(e.getId() != null)
+				query = update.replace("tabella", "risorse").replace("[id]",e.getId()+"");
+			else
+				query = insert.replace("tabella", "risorse");
+			
+			Map<String, String> mappa = e.toMap();
+			BigInteger id = db.update(query,mappa);
+			if(e.getId()==null)
+				ris = load(id);
+			else
+				ris = load(e.getId());
+			return ris;
+		}catch(Exception exc) {
+			return null;
+		}
 	}
 
 	@Override

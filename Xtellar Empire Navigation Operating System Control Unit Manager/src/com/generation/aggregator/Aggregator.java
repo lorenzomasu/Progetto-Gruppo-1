@@ -160,12 +160,16 @@ public class Aggregator implements IAggregator{
 	 */
 	@Override
 	public int numeriCitta(String citta) {
-		int ris = ((DAORubrica)getInstance().get("daorubrica")).elencoNumeri(citta).size();
+		return ((DAORubrica)getInstance().get("daorubrica")).elencoNumeri(citta).size();
 	}
 
 	@Override
 	public List<Razza> esiste(String caratteristica) {
-		return ((DAORazze)getInstance().get("daorazze")).esiste(caratteristica);
+		List<Entity> test = ((DAORazze)getInstance().get("daorazze")).esiste(caratteristica);
+		List<Razza> ris = new ArrayList<Razza>();
+		for(Entity e : test)
+			ris.add((Razza)e);
+		return ris;
 	}
 
 	@Override
@@ -334,7 +338,7 @@ public class Aggregator implements IAggregator{
 		List<Entity> razze = ((DAORazze)getInstance().get("daorazze")).list();
 		Razza raz = null;
 		for(Entity e : razze) {
-			if(((Razza)e).getNome().equalsIgnoreCase(p)) {
+			if(((Razza)e).getNome().equalsIgnoreCase(r)) {
 				raz = (Razza)e;
 				break;
 			}
@@ -368,7 +372,7 @@ public class Aggregator implements IAggregator{
 		List<Entity> razze = ((DAORazze)getInstance().get("daorazze")).list();
 		Razza raz = null;
 		for(Entity e : razze) {
-			if(((Razza)e).getNome().equalsIgnoreCase(p)) {
+			if(((Razza)e).getNome().equalsIgnoreCase(r)) {
 				raz = (Razza)e;
 				break;
 			}
@@ -407,6 +411,39 @@ public class Aggregator implements IAggregator{
 				tot++;
 		}
 		return tot;
+	}
+	
+	public List<Risorsa> risorsaPiuPresente() {
+		List<Entity> contiene = ((DAOContiene)getInstance().get("daocontiene")).list();
+		Map<Integer, Integer> mappa = new HashMap<Integer, Integer>();
+		
+		for(Entity e : contiene) {
+			if(mappa.get(((Contiene)e).getIdrisorsa()) == null)
+				mappa.put(((Contiene)e).getIdrisorsa(), 0);
+			else
+				mappa.put(((Contiene)e).getIdrisorsa(), mappa.get(((Contiene)e).getIdrisorsa()) + ((Contiene)e).getQuantita());
+		}
+		if(mappa.isEmpty())
+			return null;
+		List<Risorsa> ris = new ArrayList<Risorsa>();
+		int tot=0;
+		for(Integer i : mappa.keySet()) {
+			if(tot<=mappa.get(i)) {
+				Risorsa r = new Risorsa();
+				r.setId(i);
+				if(tot == mappa.get(i)) 
+					ris.add(r);
+				else {
+					ris.clear();
+					ris.add(r);
+					tot = mappa.get(i);
+				}
+			}
+		}
+		for(Risorsa r : ris) {
+			r = (Risorsa)((DAORisorse)getInstance().get("daorisorse")).load(r.getId());
+		}
+		return ris;
 	}
 
 	

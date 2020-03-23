@@ -55,6 +55,8 @@ public interface IAggregator {
 
 	public int popolazionePianeta(String p);
 	
+	public List<Risorsa> risorsaPiuPresente();
+	
 	public List<Risorsa> risorsePianeta(String p);
 
 	public List<Pianeta> PianetiConRisorsa(String r);

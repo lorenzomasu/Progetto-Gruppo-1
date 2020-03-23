@@ -29,7 +29,7 @@ public class DAORubrica implements IDAO, IDAORubrica{
 		return ((Rubrica)list(query).get(0)).getIndirizzo();
 	}
 	
-	//data una città ritornare lista di numeri di quella citta
+	//data una cittﾃ� ritornare lista di numeri di quella citta
 	public List<Entity> elencoNumeri(String citta) {
 		String query = read.replace("*", "numero").replace("tabella", "rubrica").replace("id = [id]", "citta = '" + citta + "'"); 
 		return list(query); 
@@ -56,26 +56,37 @@ public class DAORubrica implements IDAO, IDAORubrica{
 
 	@Override
 	public Entity load(BigInteger id) {
-		String query = read.replace("tabella","rubrica").replace("[id]",id+"");
-		Entity e = new Rubrica();
-		e.fromMap(db.row(query));
-		return e;
+		try {
+			String query = read.replace("tabella","rubrica").replace("[id]",id+"");
+			Entity e = new Rubrica();
+			e.fromMap(db.row(query));
+			return e;
+		}catch(Exception e) {
+			return null;
+		}
 	}
 
 	@Override
 	public Entity load(Entity e) {
-		Entity ris = null;
-		String query = "";
-		
-		if(e.getId() != null)
-			query = update.replace("tabella", "rubrica").replace("[id]",e.getId()+"");
-		else
-			query = insert.replace("tabella", "rubrica");
-		
-		Map<String, String> mappa = e.toMap();
-		BigInteger id = db.update(query,mappa);
-		ris = load(id);
-		return ris;
+		try {
+			Entity ris = null;
+			String query = "";
+			
+			if(e.getId() != null)
+				query = update.replace("tabella", "rubrica").replace("[id]",e.getId()+"");
+			else
+				query = insert.replace("tabella", "rubrica");
+			
+			Map<String, String> mappa = e.toMap();
+			BigInteger id = db.update(query,mappa);
+			if(e.getId()==null)
+				ris = load(id);
+			else
+				ris = load(e.getId());
+			return ris;
+		}catch(Exception exc) {
+			return null;
+		}
 	}
 
 	@Override
