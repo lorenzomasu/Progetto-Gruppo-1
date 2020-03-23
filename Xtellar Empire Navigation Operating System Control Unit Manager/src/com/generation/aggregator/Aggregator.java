@@ -103,9 +103,6 @@ public class Aggregator implements IAggregator{
 		return ((DAORazze) getInstance().get("daorazze")).delete(BigInteger.valueOf(id));
 	}
 	
-	
-	
-	
 	public Entity cercaRisorsa(int id) {
 		return  ((DAORisorse) getInstance().get("daorisorse")).load(BigInteger.valueOf(id));
 	}
