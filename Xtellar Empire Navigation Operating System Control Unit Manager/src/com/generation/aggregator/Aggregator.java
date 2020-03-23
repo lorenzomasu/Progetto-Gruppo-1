@@ -1,5 +1,6 @@
 package com.generation.aggregator;
 
+import java.math.BigInteger;
 import java.util.*;
 
 import com.generation.base.Entity;
@@ -12,15 +13,12 @@ public class Aggregator implements IAggregator{
 
 	private static Aggregator instance;
 	
-	IDAO daoesseri;
-	IDAO daopianeti;
-	IDAO daorazze;
-	IDAO daorisorse;
-	IDAO daorubrica;
-	IDAO daocontiene;
-	IDatabase db;
 	private Map<String,Object> dependencies = new HashMap<String,Object>();
 	
+	/**
+	 * costruttore aggregator, crea tutti i dao necessari e li mette in dependencies
+	 * @author Ivan Capra
+	 */
 	public Aggregator() {
 		IDatabase db = Database.getInstance();
 		db.setPercorso("jdbc:mysql://localhost:3306/impero");
@@ -46,6 +44,9 @@ public class Aggregator implements IAggregator{
 		
 	}
 	
+	/**
+	 * metodo per prendere l'istanza dell'aggregator
+	 */
 	public static Aggregator getInstance() {
 		if(instance == null)
 			instance = new Aggregator();
@@ -57,9 +58,109 @@ public class Aggregator implements IAggregator{
 	}
 	
 	/*
-	 * RICORDARSI DI METTERE CERCA, MODIFICA, AGGIORNA ED ELIMINA PER OGNI SINGOLA ENTITY
+	 * RICORDARSI DI METTERE CERCA, MODIFICA, CARICA ED ELIMINA PER OGNI SINGOLA ENTITY
 	 */
 	
+	public Entity cercaEssere(int id) {
+		return  ((DAOEsseri) getInstance().get("daoesseri")).load(BigInteger.valueOf(id));
+	}
+	
+	public Entity modificaCreaEssere(Entity e) {
+		return ((DAOEsseri) getInstance().get("daoesseri")).load(e);
+	}
+	
+	public boolean eliminaEssere(int id) {
+		return ((DAOEsseri) getInstance().get("daoesseri")).delete(BigInteger.valueOf(id));
+	}
+	
+	
+	
+	
+	public Entity cercaPianeta(int id) {
+		return  ((DAOPianeti) getInstance().get("daopianeti")).load(BigInteger.valueOf(id));
+	}
+	
+	public Entity modificaCreaPianeta(Entity e) {
+		return ((DAOPianeti) getInstance().get("daopianeti")).load(e);
+	}
+	
+	public boolean eliminaPianeta(int id) {
+		return ((DAOPianeti) getInstance().get("daopianeti")).delete(BigInteger.valueOf(id));
+	}
+	
+	
+	
+	
+	public Entity cercaRazza(int id) {
+		return  ((DAORazze) getInstance().get("daorazze")).load(BigInteger.valueOf(id));
+	}
+	
+	public Entity modificaCreaRazza(Entity e) {
+		return ((DAORazze) getInstance().get("daorazze")).load(e);
+	}
+	
+	public boolean eliminaRazza(int id) {
+		return ((DAORazze) getInstance().get("daorazze")).delete(BigInteger.valueOf(id));
+	}
+	
+	
+	
+	
+	public Entity cercaRisorsa(int id) {
+		return  ((DAORisorse) getInstance().get("daorisorse")).load(BigInteger.valueOf(id));
+	}
+	
+	public Entity modificaCreaRisorsa(Entity e) {
+		return ((DAORisorse) getInstance().get("daorisorse")).load(e);
+	}
+	
+	public boolean eliminaRisorsa(int id) {
+		return ((DAORisorse) getInstance().get("daorisorse")).delete(BigInteger.valueOf(id));
+	}
+	
+	public Entity modificaRisorsaAPianeta(int idpianeta, int idrisorsadamodificare, int idrisorsanuova) {
+		Map<String, String> e = new HashMap<String,String>();
+		e.put("idpianeta", idpianeta+"");
+		e.put("idrisorsa", idrisorsadamodificare+"");
+		Map<String, String> modifica = new HashMap<String,String>();
+		modifica.put("idpianeta", idpianeta+"");
+		modifica.put("idrisorsa", idrisorsanuova+"");
+		return ((DAOContiene)getInstance().get("daocontiene")).load(e, modifica);
+	}
+	
+	public Entity aggiungiRisorsaAPianeta(int idpianeta, int idrisorsa, int quantita) {
+		Map<String, String> e = new HashMap<String,String>();
+		e.put("idpianeta", idpianeta+"");
+		e.put("idrisorsa", idrisorsa+"");
+		e.put("quantita", quantita+"");
+		return ((DAOContiene)getInstance().get("daocontiene")).load(e, null);
+	}
+	
+	public boolean eliminaRisorsaPianeta(int idpianeta, int idrisorsa) {
+		return ((DAOContiene)getInstance().get("daocontiene")).deleteRisorsaDaPianeta(BigInteger.valueOf(idpianeta), BigInteger.valueOf(idrisorsa));
+	}
+	
+	
+	
+	
+	public Entity cercaRubrica(int id) {
+		return  ((DAORubrica) getInstance().get("daorubrica")).load(BigInteger.valueOf(id));
+	}
+	
+	public Entity modificaCreaRubrica(Entity e) {
+		return ((DAORubrica) getInstance().get("daorubrica")).load(e);
+	}
+	
+	public boolean eliminaRubrica(int id) {
+		return ((DAORubrica) getInstance().get("daorubrica")).delete(BigInteger.valueOf(id));
+	}
+	
+	
+	
+	
+	/*
+	 * CRUD
+	 */
 	@Override
 	public int numeriCitta(String citta) {
 		int ris = ((DAORubrica)getInstance().get("daorubrica")).elencoNumeri(citta).size();
@@ -148,29 +249,47 @@ public class Aggregator implements IAggregator{
 
 	@Override
 	public String dettagliNumero(int numero) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Entity> esseri = ((DAOEsseri) getInstance().get("daoesseri")).list();
+		Essere essere = null;
+		for(Entity e : esseri) {
+			if(((Essere)e).getIdnumero() == numero) {
+				essere = (Essere)e;
+			}
+		}
+		if(essere == null)
+			return "Nessun numero trovato.";
+		Pianeta p = (Pianeta) ((DAOPianeti) getInstance().get("daopianeti")).load(BigInteger.valueOf(essere.getIdpianeta()));
+		Razza r = (Razza) ((DAORazze)getInstance().get("daorazze")).load(BigInteger.valueOf(essere.getIdrazza()));
+		return p.toString() +", " + cittaDelNumero(numero) + ", " + indirizzoDelNumero(numero) + ", " + r.toString() + ", " + essere.toString(); 
 	}
 
 	@Override
 	public int quantitaRisorsaImpero(String nomeRisorsa) {
-		// TODO Auto-generated method stub
-		return 0;
+		List<Entity> contiene = ((DAOContiene)getInstance().get("daocontiene")).list();
+		List<Entity> risorse = ((DAORisorse)getInstance().get("daorisorse")).list();
+		int id = -1;
+		for(Entity risorsa : risorse) {
+			if(((Risorsa)risorsa).getNome().equalsIgnoreCase(nomeRisorsa)) {
+				id = risorsa.getId().intValue();
+				break;
+			}
+		}
+		if(id == -1)
+			return -1;
+		int tot = 0;
+		for(Entity e : contiene) {
+			if(((Contiene)e).getIdrisorsa() == id)
+				tot += ((Contiene)e).getQuantita();
+		}
+		return tot;
 	}
 
 	
 	@Override
 	public int popolazioneTotaleImpero() {
-		// TODO Auto-generated method stub
-		return 0;
+		return ((DAORazze)getInstance().get("daorazze")).list().size();
 	}
 
-	@Override
-	public Risorsa risorsaPiuPresente() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
 	@Override
 	public String distanzaPianeti(String nomea, String nomeb) {
 		return  ((DAOPianeti)getInstance().get("daopianeti")).distanzaPianeti(nomea, nomeb) ;
@@ -341,12 +460,6 @@ public class Aggregator implements IAggregator{
 			pianeta.add((Pianeta)e);
 		}
 		return pianeti;
-	}
-
-	@Override
-	public boolean aggiungiRisorsaAPianeta(String nomepianeta, String nomerisorsa, int quantita) {
-		// TODO Auto-generated method stub
-		return false;
 	}
 
 	

@@ -76,23 +76,27 @@ public class DAOPianeti implements IDAO, IDAOPianeti{
 	
 	@Override
 	public String distanzaPianeti(String nomea, String nomeb) {
-		String query = read.replace("tabella", nometabella).replace("id = ?;", "nome = '" + nomea + "'");
-		Pianeta a = (Pianeta)list(query).get(0);
-		query = read.replace("tabella", nometabella).replace("id = ?;", "nome = '" + nomeb + "'");
-		Pianeta b = (Pianeta)list(query).get(0);
-		if(a.getCoordinate().length()!=20 || b.getCoordinate().length()!=20)
-			return "Coordinate pianeta errate.";
-		String ris = "";
-		for(int i=0;i<10;i++) {//ciclo delle lettere
-			if(a.getCoordinate().toCharArray()[i] - b.getCoordinate().toCharArray()[i]>='A')
-				ris += a.getCoordinate().toCharArray()[i] - b.getCoordinate().toCharArray()[i];
-			else
-				ris += 'A' + (a.getCoordinate().toCharArray()[i] - b.getCoordinate().toCharArray()[i]);
+		try{
+			String query = read.replace("tabella", nometabella).replace("id = ?;", "nome = '" + nomea + "'");
+			Pianeta a = (Pianeta)list(query).get(0);
+			query = read.replace("tabella", nometabella).replace("id = ?;", "nome = '" + nomeb + "'");
+			Pianeta b = (Pianeta)list(query).get(0);
+			if(a.getCoordinate().length()!=20 || b.getCoordinate().length()!=20)
+				return "Coordinate pianeta errate.";
+			String ris = "";
+			for(int i=0;i<10;i++) {//ciclo delle lettere
+				if(a.getCoordinate().toCharArray()[i] - b.getCoordinate().toCharArray()[i]>='A')
+					ris += a.getCoordinate().toCharArray()[i] - b.getCoordinate().toCharArray()[i];
+				else
+					ris += 'A' + (a.getCoordinate().toCharArray()[i] - b.getCoordinate().toCharArray()[i]);
+			}
+			for(int i=10;i<20;i++) {
+				ris += String.valueOf(Math.abs(a.getCoordinate().toCharArray()[i] - b.getCoordinate().toCharArray()[i]));
+			}
+			return ris;
+		} catch(Exception e) {
+			return null;
 		}
-		for(int i=10;i<20;i++) {
-			ris += String.valueOf(Math.abs(a.getCoordinate().toCharArray()[i] - b.getCoordinate().toCharArray()[i]));
-		}
-		return ris;
 	}
 	/**
 	 * true se esiste gia, false se non esiste

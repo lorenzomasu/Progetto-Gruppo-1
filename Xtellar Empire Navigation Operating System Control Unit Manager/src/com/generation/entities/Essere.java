@@ -79,6 +79,12 @@ public class Essere extends Entity implements IEssere{
 	public int eta() {
 		return Calendar.YEAR - Integer.parseInt(String.valueOf(dob).split("-")[0]);
 	}
+
+	@Override
+	public String toString() {
+		return "ID: " + getId() + "\nnome: " + nome + ", \ncognome: " + cognome + ", \ndob: " + dob + ", \nidrazza: " + idrazza
+				+ ", \nidnumero: " + idnumero + ", \nidpianeta: " + idpianeta;
+	}
 	
 	
 }

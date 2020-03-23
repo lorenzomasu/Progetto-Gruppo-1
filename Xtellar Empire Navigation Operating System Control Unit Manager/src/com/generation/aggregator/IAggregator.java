@@ -7,6 +7,8 @@ import com.generation.entities.*;
 
 public interface IAggregator {
 
+	
+	
 	public int numeriCitta(String citta);
 	
 	public List<Razza> esiste(String caratteristica);
@@ -53,14 +55,8 @@ public interface IAggregator {
 
 	public int popolazionePianeta(String p);
 	
-	public Risorsa risorsaPiuPresente();
-	
-	public List<String> sortValore();
-	
 	public List<Risorsa> risorsePianeta(String p);
 
 	public List<Pianeta> PianetiConRisorsa(String r);
-	
-	public boolean aggiungiRisorsaAPianeta(String nomepianeta, String nomerisorsa, int quantita);
 	
 }

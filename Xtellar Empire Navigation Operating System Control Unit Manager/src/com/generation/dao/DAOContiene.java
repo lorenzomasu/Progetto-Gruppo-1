@@ -76,22 +76,41 @@ public class DAOContiene implements IDAO, IDAOContiene{
 	}
 
 	@Override
+	@Deprecated
 	public boolean delete(BigInteger id) {
-		return db.update(delete.replace("tabella", nometabella).replace("[id]", id+"")) == null;
+		return false;
 	}
 	
 	
-	public Entity load(Map<String, String> e) {
+	public boolean deleteRisorsa(BigInteger id) {
+		return db.update(delete.replace("tabella", nometabella).replace("id = [id]", "idrisorsa = " + id+"")) == null;
+	}
+	
+	public boolean deletePianeta(BigInteger id) {
+		return db.update(delete.replace("tabella", nometabella).replace("id = [id]", "idpianeta = " + id+"")) == null;
+	}
+	
+	public boolean deleteRisorsaDaPianeta(BigInteger idpianeta, BigInteger idrisorsa) {
+		return db.update(delete.replace("tabella", nometabella).replace("id = [id]", "idpianeta = " + idpianeta+"" + " and idrisorsa = " + idrisorsa+"")) == null;
+	}
+	
+	
+	public Entity load(Map<String, String> e, Map<String,String> modifiche) {
 		BigInteger id = null;
 		String query="";
-		if(e.get("idpianeta")!=null && e.get("idrisorse")!=null) // la mia entity esiste gia nel db
-			query = update.replace("tabella", nometabella).replace("where idpianeta = [id];", e.get("idpianeta"));
-		else
+		if(e.get("idpianeta")!=null && e.get("idrisorse")!=null && modifiche!=null) { // la mia entity esiste gia nel db
+			query = update.replace("tabella", nometabella).replace("id = [id];", "idpianeta = " + e.get("idpianeta") + " and idrisorsa = " + e.get("idrisorsa"));
+			id = db.update(query, modifiche);
+		}
+		else if(e.get("idpianeta")!=null && e.get("idrisorse")!=null && modifiche==null){
 			query = insert.replace("tabella", nometabella);
-		id = db.update(query, e);
+			id = db.update(query, e);
+		}
 		return searchRisorsa(id).get(0);
 	}
 
+	
+	
 	@Override
 	public List<Entity> pianetiConRisorsa(Risorsa r) {
 		String query = read.replace("tabella", nometabella).replace("id = ?;", "idrisorsa = " + r.getId());
