@@ -2,7 +2,7 @@ package com.generation.entities;
 
 import com.generation.base.Entity;
 
-public class Risorsa extends Entity{
+public class Risorsa extends Entity implements IRisorsa{
 	private String nome, descrizione;
 	private int valore;
 	public Risorsa(String nome, String descrizione, int valore) {

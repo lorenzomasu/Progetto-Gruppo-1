@@ -5,7 +5,7 @@
     project="Xtellar Empire Navigation Operating System Control Unit Manager" 
     file="/Xtellar Empire Navigation Operating System Control Unit Manager/src/com/generation/entities/Essere.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="477" width="194" x="156" y="129"/>    
+    <position height="-1" width="-1" x="806" y="219"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -16,17 +16,556 @@
     project="Xtellar Empire Navigation Operating System Control Unit Manager" 
     file="/Xtellar Empire Navigation Operating System Control Unit Manager/src/com/generation/dao/DAOEsseri.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="657" y="319"/>    
+    <position height="-1" width="-1" x="1148" y="187"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <dependency id="3">    
+  <class id="3" language="java" name="com.generation.base.Entity" project="Utility" 
+    file="/Utility/src/com/generation/base/Entity.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-15" y="309"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="com.generation.entities.Pianeta" 
+    project="Xtellar Empire Navigation Operating System Control Unit Manager" 
+    file="/Xtellar Empire Navigation Operating System Control Unit Manager/src/com/generation/entities/Pianeta.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="812" y="810"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="com.generation.entities.Razza" 
+    project="Xtellar Empire Navigation Operating System Control Unit Manager" 
+    file="/Xtellar Empire Navigation Operating System Control Unit Manager/src/com/generation/entities/Razza.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="785" y="-352"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="com.generation.entities.Risorsa" 
+    project="Xtellar Empire Navigation Operating System Control Unit Manager" 
+    file="/Xtellar Empire Navigation Operating System Control Unit Manager/src/com/generation/entities/Risorsa.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="833" y="1635"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="com.generation.entities.Rubrica" 
+    project="Xtellar Empire Navigation Operating System Control Unit Manager" 
+    file="/Xtellar Empire Navigation Operating System Control Unit Manager/src/com/generation/entities/Rubrica.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="414" y="-602"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="com.generation.entities.Contiene" 
+    project="Xtellar Empire Navigation Operating System Control Unit Manager" 
+    file="/Xtellar Empire Navigation Operating System Control Unit Manager/src/com/generation/entities/Contiene.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="826" y="1150"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="com.generation.dao.DAOContiene" 
+    project="Xtellar Empire Navigation Operating System Control Unit Manager" 
+    file="/Xtellar Empire Navigation Operating System Control Unit Manager/src/com/generation/dao/DAOContiene.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1197" y="1287"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="com.generation.dao.DAOPianeti" 
+    project="Xtellar Empire Navigation Operating System Control Unit Manager" 
+    file="/Xtellar Empire Navigation Operating System Control Unit Manager/src/com/generation/dao/DAOPianeti.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1149" y="751"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="com.generation.dao.DAORazze" 
+    project="Xtellar Empire Navigation Operating System Control Unit Manager" 
+    file="/Xtellar Empire Navigation Operating System Control Unit Manager/src/com/generation/dao/DAORazze.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1152" y="-285"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="com.generation.dao.DAORisorse" 
+    project="Xtellar Empire Navigation Operating System Control Unit Manager" 
+    file="/Xtellar Empire Navigation Operating System Control Unit Manager/src/com/generation/dao/DAORisorse.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1181" y="1744"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="com.generation.dao.DAORubrica" 
+    project="Xtellar Empire Navigation Operating System Control Unit Manager" 
+    file="/Xtellar Empire Navigation Operating System Control Unit Manager/src/com/generation/dao/DAORubrica.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1138" y="-651"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="14" language="java" name="com.generation.entities.IEssere" 
+    project="Xtellar Empire Navigation Operating System Control Unit Manager" 
+    file="/Xtellar Empire Navigation Operating System Control Unit Manager/src/com/generation/entities/IEssere.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="805" y="-101"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="15" language="java" name="com.generation.entities.IPianeta" 
+    project="Xtellar Empire Navigation Operating System Control Unit Manager" 
+    file="/Xtellar Empire Navigation Operating System Control Unit Manager/src/com/generation/entities/IPianeta.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="795" y="575"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="16" language="java" name="com.generation.entities.IRazza" 
+    project="Xtellar Empire Navigation Operating System Control Unit Manager" 
+    file="/Xtellar Empire Navigation Operating System Control Unit Manager/src/com/generation/entities/IRazza.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="774" y="-533"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="17" language="java" name="com.generation.entities.IRubrica" 
+    project="Xtellar Empire Navigation Operating System Control Unit Manager" 
+    file="/Xtellar Empire Navigation Operating System Control Unit Manager/src/com/generation/entities/IRubrica.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="418" y="-821"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="18" language="java" name="com.generation.dao.IDAOContiene" 
+    project="Xtellar Empire Navigation Operating System Control Unit Manager" 
+    file="/Xtellar Empire Navigation Operating System Control Unit Manager/src/com/generation/dao/IDAOContiene.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1187" y="1040"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="19" language="java" name="com.generation.dao.IDAORisorse" 
+    project="Xtellar Empire Navigation Operating System Control Unit Manager" 
+    file="/Xtellar Empire Navigation Operating System Control Unit Manager/src/com/generation/dao/IDAORisorse.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1177" y="1549"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="20" language="java" name="com.generation.base.Mapper" project="Utility" 
+    file="/Utility/src/com/generation/base/Mapper.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-225" y="483"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="21" language="java" name="com.generation.base.Validator" project="Utility" 
+    file="/Utility/src/com/generation/base/Validator.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-240" y="201"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="22" language="java" name="com.generation.dao.IDAORazze" 
+    project="Xtellar Empire Navigation Operating System Control Unit Manager" 
+    file="/Xtellar Empire Navigation Operating System Control Unit Manager/src/com/generation/dao/IDAORazze.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1138" y="-458"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="23" language="java" name="com.generation.dao.IDAORubrica" 
+    project="Xtellar Empire Navigation Operating System Control Unit Manager" 
+    file="/Xtellar Empire Navigation Operating System Control Unit Manager/src/com/generation/dao/IDAORubrica.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="117" width="185" x="1050" y="-916"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="24" language="java" name="com.generation.dao.IDAOPianeti" 
+    project="Xtellar Empire Navigation Operating System Control Unit Manager" 
+    file="/Xtellar Empire Navigation Operating System Control Unit Manager/src/com/generation/dao/IDAOPianeti.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1146" y="474"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="25" language="java" name="com.generation.entities.IRisorsa" 
+    project="Xtellar Empire Navigation Operating System Control Unit Manager" 
+    file="/Xtellar Empire Navigation Operating System Control Unit Manager/src/com/generation/entities/IRisorsa.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="836" y="1398"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="26" language="java" name="com.generation.dao.IDAOEsseri" 
+    project="Xtellar Empire Navigation Operating System Control Unit Manager" 
+    file="/Xtellar Empire Navigation Operating System Control Unit Manager/src/com/generation/dao/IDAOEsseri.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1154" y="-43"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="27" language="java" name="com.generation.aggregator.Aggregator" 
+    project="Xtellar Empire Navigation Operating System Control Unit Manager" 
+    file="/Xtellar Empire Navigation Operating System Control Unit Manager/src/com/generation/aggregator/Aggregator.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2513" y="481"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="28" language="java" name="com.generation.aggregator.IAggregator" 
+    project="Xtellar Empire Navigation Operating System Control Unit Manager" 
+    file="/Xtellar Empire Navigation Operating System Control Unit Manager/src/com/generation/aggregator/IAggregator.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2430" y="-298"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="29" language="java" name="com.generation.db.Database" project="Utility" 
+    file="/Utility/src/com/generation/db/Database.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2442" y="1506"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="30" language="java" name="com.generation.db.IDatabase" project="Utility" 
+    file="/Utility/src/com/generation/db/IDatabase.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1720" y="440"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="31" language="java" name="com.generation.dao.IDAO" project="Utility" 
+    file="/Utility/src/com/generation/dao/IDAO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1710" y="824"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <association id="32">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="33" name="db"/>      
+      <multiplicity id="34" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="30" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="35">    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="31"/>  
+  </realization>  
+  <generalization id="36">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="3"/>  
+  </generalization>  
+  <dependency id="37">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="6"/>  
+  </dependency>  
+  <dependency id="38">    
+    <end type="SOURCE" refId="27"/>    
+    <end type="TARGET" refId="9"/>  
+  </dependency>  
+  <realization id="39">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="31"/>  
+  </realization>  
+  <realization id="40">    
+    <end type="SOURCE" refId="27"/>    
+    <end type="TARGET" refId="28"/>  
+  </realization>  
+  <realization id="41">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="26"/>  
+  </realization>  
+  <association id="42">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="43" name="db"/>      
+      <multiplicity id="44" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="30" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="45">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="15"/>  
+  </realization>  
+  <dependency id="46">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="7"/>  
+  </dependency>  
+  <dependency id="47">    
+    <end type="SOURCE" refId="27"/>    
+    <end type="TARGET" refId="12"/>  
+  </dependency>  
+  <realization id="48">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="20"/>  
+  </realization>  
+  <realization id="49">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="19"/>  
+  </realization>  
+  <association id="50">    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="51" name="db"/>      
+      <multiplicity id="52" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="30" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="53">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="3"/>  
+  </generalization>  
+  <realization id="54">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="31"/>  
+  </realization>  
+  <realization id="55">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="18"/>  
+  </realization>  
+  <dependency id="56">    
+    <end type="SOURCE" refId="27"/>    
+    <end type="TARGET" refId="10"/>  
+  </dependency>  
+  <association id="57">    
+    <end type="SOURCE" refId="27" navigable="false">      
+      <attribute id="58" name="instance"/>      
+      <multiplicity id="59" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="27" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="60">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="8"/>  
+  </dependency>  
+  <dependency id="61">    
     <end type="SOURCE" refId="2"/>    
     <end type="TARGET" refId="1"/>  
   </dependency>  
+  <dependency id="62">    
+    <end type="SOURCE" refId="27"/>    
+    <end type="TARGET" refId="5"/>  
+  </dependency>  
+  <generalization id="63">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="3"/>  
+  </generalization>  
+  <realization id="64">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="31"/>  
+  </realization>  
+  <dependency id="65">    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="5"/>  
+  </dependency>  
+  <realization id="66">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="24"/>  
+  </realization>  
+  <realization id="67">    
+    <end type="SOURCE" refId="29"/>    
+    <end type="TARGET" refId="30"/>  
+  </realization>  
+  <realization id="68">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="31"/>  
+  </realization>  
+  <realization id="69">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="21"/>  
+  </realization>  
+  <dependency id="70">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="4"/>  
+  </dependency>  
+  <dependency id="71">    
+    <end type="SOURCE" refId="27"/>    
+    <end type="TARGET" refId="13"/>  
+  </dependency>  
+  <realization id="72">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="14"/>  
+  </realization>  
+  <association id="73">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="74" name="db"/>      
+      <multiplicity id="75" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="30" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="76">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="4"/>  
+  </dependency>  
+  <association id="77">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="78" name="db"/>      
+      <multiplicity id="79" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="30" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="80">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="3"/>  
+  </generalization>  
+  <association id="81">    
+    <end type="SOURCE" refId="29" navigable="false">      
+      <attribute id="82" name="db"/>      
+      <multiplicity id="83" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="30" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="84">    
+    <end type="SOURCE" refId="27"/>    
+    <end type="TARGET" refId="2"/>  
+  </dependency>  
+  <dependency id="85">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="6"/>  
+  </dependency>  
+  <realization id="86">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="31"/>  
+  </realization>  
+  <generalization id="87">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="3"/>  
+  </generalization>  
+  <dependency id="88">    
+    <end type="SOURCE" refId="27"/>    
+    <end type="TARGET" refId="29"/>  
+  </dependency>  
+  <association id="89">    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="90" name="db"/>      
+      <multiplicity id="91" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="30" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="92">    
+    <end type="SOURCE" refId="27"/>    
+    <end type="TARGET" refId="11"/>  
+  </dependency>  
+  <realization id="93">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="16"/>  
+  </realization>  
+  <realization id="94">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="17"/>  
+  </realization>  
+  <realization id="95">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="23"/>  
+  </realization>  
+  <generalization id="96">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="3"/>  
+  </generalization>  
+  <realization id="97">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="25"/>  
+  </realization>  
+  <realization id="98">    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="22"/>  
+  </realization>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="true" static="true"/>    
