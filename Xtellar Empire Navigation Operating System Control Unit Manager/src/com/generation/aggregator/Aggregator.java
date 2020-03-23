@@ -3,10 +3,12 @@ package com.generation.aggregator;
 import java.util.List;
 import java.util.Map;
 
+import com.generation.base.Entity;
 import com.generation.dao.IDAO;
 import com.generation.entities.Pianeta;
 import com.generation.entities.Razza;
 import com.generation.entities.Risorsa;
+import com.generation.entities.Rubrica;
 
 public class Aggregator implements IAggregator{
 
@@ -99,33 +101,35 @@ public class Aggregator implements IAggregator{
 		return 0;
 	}
 
+	@Override // da
+	public String cittaDelNumero(int numero) 
+	{
+		
+		
+		return ((DAORubrica) getInstance().get("daorubrica")).cittaDelNumero(numero);
+		
+	}
+
 	@Override
-	public String cittaDelNumero(int numero) {
-		// TODO Auto-generated method stub
+	public String indirizzoDelNumero(int numero) 
+	{
+		
+		 return ((DAORubrica) getInstance().get("daorubrica")).indirizzoDelNumero(indirizzo);;
+	}
+
+	
+
+	@Override
+	public String dettagliNumero(int numero) 
+	{
+		
 		return null;
 	}
 
 	@Override
-	public String indirizzoDelNumero(int numero) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Razza razza(String nome) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String dettagliNumero(int numero) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int quantitaRisorsaImpero(String nomeRisorsa) {
-		// TODO Auto-generated method stub
+	public int quantitaRisorsaImpero(String nomeRisorsa) 
+	{
+		
 		return 0;
 	}
 
@@ -136,7 +140,7 @@ public class Aggregator implements IAggregator{
 		return 0;
 	}
 
-	@Override
+	@Override  // a
 	public Risorsa risorsaPiuPresente() {
 		// TODO Auto-generated method stub
 		return null;

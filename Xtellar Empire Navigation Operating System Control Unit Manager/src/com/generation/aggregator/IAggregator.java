@@ -193,5 +193,7 @@ public interface IAggregator {
 	public List<Pianeta> PianetiConRisorsa(String r);
 	
 	public boolean aggiungiRisorsaAPianeta(String nomepianeta, String nomerisorsa, int quantita);
+
+	String cittaDelNumero(int numero, List<Razza> citta);
 	
 }
