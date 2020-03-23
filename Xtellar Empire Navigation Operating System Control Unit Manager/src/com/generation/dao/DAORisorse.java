@@ -14,6 +14,11 @@ public class DAORisorse implements IDAO, IDAORisorse{
 	
 	private IDatabase db; 
 
+
+	public DAORisorse(IDatabase db) {
+		this.db = db;
+	}
+
 	@Override
 	public double valoreMedioRisorse() {
 		String query = read.replace("*", "avg(valore) valMedio").replace("tabella", "risorse").replace("where id = [id]", ""); 
@@ -23,7 +28,9 @@ public class DAORisorse implements IDAO, IDAORisorse{
 	@Override
 	public int valoreRisorsa(String nomeRisorsa) {
 		String query = read.replace("*", "valore").replace("tabella", "risorse").replace("id = [id]", "nome = '" + nomeRisorsa + "'");
-		return Integer.parseInt(db.row(query).getValore()); 
+		Entity e = new Risorsa();
+		e.fromMap(db.row(query));
+		return ((Risorsa)e).getValore(); 
 	}
 
 	@Override

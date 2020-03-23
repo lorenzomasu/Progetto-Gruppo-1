@@ -521,7 +521,7 @@ public class Main {
 								else
 									sottorisposta = razze.size() + " razze trovate: ";
 								for(Razza r : razze)
-									sottorisposta += r.toString();
+									sottorisposta += r.toString() + "\n";
 							}
 							break;
 							
@@ -549,7 +549,7 @@ public class Main {
 								else
 									sottorisposta = "I pianeti piu' grandi sono: ";
 								for(Pianeta p : pianeti)
-									sottorisposta += p.toString();								
+									sottorisposta += p.toString() + "\n";								
 							}
 							break;
 							
@@ -563,7 +563,7 @@ public class Main {
 								else
 									sottorisposta = "I pianeti piu' piccoli sono: ";
 								for(Pianeta p : pianeti)
-									sottorisposta += p.toString();								
+									sottorisposta += p.toString() + "\n";								
 							}
 							break;
 						
@@ -620,15 +620,13 @@ public class Main {
 								sottorisposta = "Il valore della risorsa cercata e': " + r;
 							break;
 						case "6"://6)Dettagli dato un numero
-							System.out.println("Inserisci il numero da cercare:");
-							String s = tastiera.nextLine();
 							try {
-								r = Integer.parseInt(s);
+								System.out.println("Inserisci il numero da cercare:");
+								sottorisposta = a.dettagliNumero(Integer.parseInt(tastiera.nextLine()));
 							} catch(Exception e) {
 								sottorisposta = "Inserimento numero errato.";
 								break;
 							}
-							sottorisposta = a.dettagliNumero(r);
 							break;
 						case "7"://7)Quantita' risorsa
 							System.out.println("Inserisci nome della risorsa:");
@@ -665,11 +663,16 @@ public class Main {
 						 */
 						switch(sottoopzione) {
 						case "1"://1)Risorsa piu' presente
-							Risorsa ri = a.risorsaPiuPresente();
-							if(ri.getId().intValue() == 0)
-								sottorisposta = "Nessuna risorsa trovata.";
-							else
-								sottorisposta = ri.toString();
+							List<Risorsa> ri = a.risorsaPiuPresente();
+							if(ri == null)
+								sottorisposta = "Nessuna risorsa nell'impero.";
+							else if(ri.size() == 1) 
+								sottorisposta = "Risorsa piu' presente: " + ri.get(0).toString();
+							else {
+								sottorisposta = "Risorse piu' presenti: ";
+								for(Risorsa r : ri)
+									sottorisposta = r.toString() + "\n";
+							}
 							break;
 							
 						case "2"://2)Distanza tra due pianeti
@@ -695,7 +698,7 @@ public class Main {
 							else {
 								sottorisposta = "Le razze sul pianeta cercato sono: ";
 								for(Razza ra : r)
-									sottorisposta += ra.toString();
+									sottorisposta += ra.toString() + "\n";
 							}
 							break;
 							
@@ -712,7 +715,7 @@ public class Main {
 							else {
 								sottorisposta = "La razza vive sui pianeti: ";
 								for(Pianeta ra : pia)
-									sottorisposta += ra.toString();
+									sottorisposta += ra.toString() + "\n";
 							}
 							break;
 							
@@ -745,7 +748,7 @@ public class Main {
 							else{
 								sottorisposta = "Risorse su pianeta: ";
 								for(Risorsa risorsa : ris)
-									sottorisposta += risorsa.toString();
+									sottorisposta += risorsa.toString() + "\n";
 							}
 							break;
 							
@@ -762,7 +765,7 @@ public class Main {
 							else {
 								sottorisposta = "Pianeti con la risorsa: ";
 								for(Pianeta ra : pia)
-									sottorisposta += ra.toString();
+									sottorisposta += ra.toString() + "\n";
 							}
 							break;
 							
