@@ -118,13 +118,13 @@ public class Aggregator implements IAggregator{
 	}
 
 	
-
+ 
 	@Override
 	public String dettagliNumero(int numero) 
 	{
 		
 		return null;
-	}
+	} 
 
 	@Override
 	public int quantitaRisorsaImpero(String nomeRisorsa) 
