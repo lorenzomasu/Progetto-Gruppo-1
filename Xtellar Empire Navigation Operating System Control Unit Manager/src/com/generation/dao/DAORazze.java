@@ -19,7 +19,7 @@ public class DAORazze implements IDAO, IDAORazze {
 
 	@Override
 	public List<Entity> esiste(String caratteristica) {
-		String query = read.replace("tabella", "razze").replace("id = [id]", "descrizione = '" + caratteristica + "'");
+		String query = read.replace("tabella", "razze").replace("id = ?", "descrizione = '" + caratteristica + "'");
 		if(list(query) != null)
 			return list(query); 
 		return null;
@@ -27,7 +27,7 @@ public class DAORazze implements IDAO, IDAORazze {
 
 	@Override
 	public List<Entity> list() {
-		String query = read.replace("tabella","razze").replace("where id = [id]", "");
+		String query = read.replace("tabella","razze").replace("where id = ?", "");
 		return list(query);
 	}
 
@@ -47,26 +47,37 @@ public class DAORazze implements IDAO, IDAORazze {
 
 	@Override
 	public Entity load(BigInteger id) {
-		String query = read.replace("tabella","razze").replace("[id]",id+"");
-		Entity e = new Razza();
-		e.fromMap(db.row(query));
-		return e;
+		try{
+			String query = read.replace("tabella","razze").replace("?",id+"");
+		
+			Entity e = new Razza();
+			e.fromMap(db.row(query));
+			return e;
+		} catch(Exception e) {
+			return null;
+		}
 	}
 
 	@Override
 	public Entity load(Entity e) {
-		Entity ris = null;
-		String query = "";
-		
-		if(e.getId() != null)
-			query = update.replace("tabella", "razze").replace("[id]",e.getId()+"");
-		else
-			query = insert.replace("tabella", "razze");
-		
-		Map<String, String> mappa = e.toMap();
-		BigInteger id = db.update(query,mappa);
-		ris = load(id);
-		return ris;
+		try{
+			Entity ris = null;
+			String query = "";
+			
+			if(e.getId() != null)
+				query = update.replace("tabella", "razze").replace("[id]",e.getId()+"");
+			else
+				query = insert.replace("tabella", "razze");
+			Map<String, String> mappa = e.toMap();
+			BigInteger id = db.update(query,mappa);
+			if(e.getId()==null)
+				ris = load(id);
+			else
+				ris = load(e.getId());
+			return ris;
+		}catch(Exception exc) {
+			return null;
+		}
 	}
 
 	@Override

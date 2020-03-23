@@ -36,4 +36,11 @@ public class Razza extends Entity implements IRazza{
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	@Override
+	public String toString() {
+		return  "ID: " + getId() + "\nnome: " + nome + ", \ndescrizione: " + descrizione;
+	}
+	
+	
 }

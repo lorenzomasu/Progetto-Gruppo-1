@@ -40,7 +40,7 @@ public class Main {
 						+ "2)Modifica essere.\n"
 						+ "3)Aggiungi essere.\n"
 						+ "4)Elimina essere.\n";
-				sottomenu1 += "0)Esci";
+				sottomenu1 += "0)Indietro";
 				sottoopzione = "";
 				
 				do {//do while gestito da sottoopzione
@@ -53,7 +53,7 @@ public class Main {
 						System.out.println("Inserisci id dell'essere:");
 						try {
 							essere = a.cercaEssere(Integer.parseInt(tastiera.nextLine()));
-							if(essere.getId() == null)
+							if(essere == null || essere.getId() == null)
 								sottorisposta = "Essere non trovato.";
 							else
 								sottorisposta = essere.toString();
@@ -65,9 +65,12 @@ public class Main {
 					case "2"://2)Modifica essere.
 					case "3"://aggiungi essere
 						try{
-							System.out.println("Inserisci id essere:");
 							essere = new Essere();
-							essere.setId(Integer.parseInt(tastiera.nextLine()));
+							if(sottoopzione.equals("2")) {
+								System.out.println("Inserisci id essere:");
+								essere.setId(Integer.parseInt(tastiera.nextLine()));
+								System.out.println("Nuovi dati:");
+							}
 							System.out.println("Inserisci nome essere:");
 							((Essere)essere).setNome(tastiera.nextLine());
 							System.out.println("Inserisci cognome essere:");
@@ -84,7 +87,9 @@ public class Main {
 							System.out.println("Inserisci id pianeta:");
 							((Essere)essere).setIdpianeta(Integer.parseInt(tastiera.nextLine()));
 							essere = a.modificaCreaEssere(essere);
-							if(sottoopzione == "2")
+							if(essere == null)
+								sottorisposta = "Errore nei dati.";
+							else if(sottoopzione.equals("2"))
 								sottorisposta = "Essere modificato: " + essere.toString();
 							else
 								sottorisposta = "Essere aggiunto: " + essere.toString();
@@ -113,7 +118,7 @@ public class Main {
 						+ "2)Modifica razza.\n"
 						+ "3)Aggiungi razza.\n"
 						+ "4)Elimina razza.\n";
-				sottomenu1 += "0)Esci";
+				sottomenu1 += "0)Indietro";
 				sottoopzione = "";
 				
 				do {//do while gestito da sottoopzione
@@ -126,7 +131,7 @@ public class Main {
 						System.out.println("Inserisci id della razza:");
 						try {
 							razza = a.cercaRazza(Integer.parseInt(tastiera.nextLine()));
-							if(razza.getId() == null)
+							if(razza == null || razza.getId() == null)
 								sottorisposta = "Razza non trovato.";
 							else
 								sottorisposta = razza.toString();
@@ -138,19 +143,25 @@ public class Main {
 					case "2"://2)Modifica razza.
 					case "3"://aggiungi razza
 						try{
-							System.out.println("Inserisci id razza:");
 							razza = new Razza();
-							razza.setId(Integer.parseInt(tastiera.nextLine()));
+							if(sottoopzione.equals("2")) {
+								System.out.println("Inserisci id razza:");
+								razza.setId(Integer.parseInt(tastiera.nextLine()));
+								System.out.println("Nuovi dati:");
+							}
 							System.out.println("Inserisci nome razza:");
 							((Razza)razza).setNome(tastiera.nextLine());
 							System.out.println("Inserisci descrizione razza:");
 							((Razza)razza).setDescrizione(tastiera.nextLine());
 							razza = a.modificaCreaRazza(razza);
-							if(sottoopzione == "2")
+							if(razza == null)
+								sottorisposta = "Errore nei dati.";
+							else if(sottoopzione.equals("2"))
 								sottorisposta = "Razza modificata: " + razza.toString();
 							else
 								sottorisposta = "Razza aggiunta: " + razza.toString();
 						} catch(Exception e) {
+							e.printStackTrace();
 							sottorisposta = "Errore nell'inserimento dati.";
 						}
 						break;
@@ -178,7 +189,7 @@ public class Main {
 						+ "5)Aggiungi risorsa a pianeta.\n"
 						+ "6)Modifica risorsa di un pianeta.\n"
 						+ "7)Elimina risorsa da un pianeta.\n";
-				sottomenu1 += "0)Esci";
+				sottomenu1 += "0)Indietro";
 				sottoopzione = "";
 				
 				do {//do while gestito da sottoopzione
@@ -191,7 +202,7 @@ public class Main {
 						System.out.println("Inserisci id del pianeta:");
 						try {
 							pianeta = a.cercaPianeta(Integer.parseInt(tastiera.nextLine()));
-							if(pianeta.getId() == null)
+							if(pianeta == null || pianeta.getId() == null)
 								sottorisposta = "Pianeta non trovato.";
 							else
 								sottorisposta = pianeta.toString();
@@ -203,9 +214,12 @@ public class Main {
 					case "2"://2)Modifica pianeta.
 					case "3"://aggiungi pianeta
 						try{
-							System.out.println("Inserisci id pianeta:");
 							pianeta = new Pianeta();
-							pianeta.setId(Integer.parseInt(tastiera.nextLine()));
+							if(sottoopzione.equals("2")) {
+								System.out.println("Inserisci id pianeta:");
+								pianeta.setId(Integer.parseInt(tastiera.nextLine()));
+								System.out.println("Nuovi dati:");
+							}
 							System.out.println("Inserisci nome pianeta:");
 							((Pianeta)pianeta).setNome(tastiera.nextLine());
 							System.out.println("Inserisci grandezza pianeta:");
@@ -213,7 +227,9 @@ public class Main {
 							System.out.println("Inserisci coordinate pianeta:");
 							((Pianeta)pianeta).setCoordinate(tastiera.nextLine());
 							pianeta = a.modificaCreaPianeta(pianeta);
-							if(sottoopzione == "2")
+							if(pianeta == null)
+								sottorisposta = "Errore nei dati.";
+							else if(sottoopzione.equals("2"))
 								sottorisposta = "Pianeta modificato: " + pianeta.toString();
 							else
 								sottorisposta = "Pianeta aggiunto: " + pianeta.toString();
@@ -289,7 +305,7 @@ public class Main {
 						+ "5)Aggiungi risorsa a pianeta.\n"
 						+ "6)Modifica risorsa di un pianeta.\n"
 						+ "7)Elimina risorsa da un pianeta.\n";;
-				sottomenu1 += "0)Esci";
+				sottomenu1 += "0)Indietro";
 				sottoopzione = "";
 				
 				do {//do while gestito da sottoopzione
@@ -302,7 +318,7 @@ public class Main {
 						System.out.println("Inserisci id della risorsa:");
 						try {
 							risorsa = a.cercaRisorsa(Integer.parseInt(tastiera.nextLine()));
-							if(risorsa.getId() == null)
+							if(risorsa == null || risorsa.getId() == null)
 								sottorisposta = "Risorsa non trovato.";
 							else
 								sottorisposta = risorsa.toString();
@@ -314,15 +330,20 @@ public class Main {
 					case "2"://2)Modifica risorsa.
 					case "3": //aggiungi risorsa
 						try{
-							System.out.println("Inserisci id pianeta:");
 							risorsa = new Risorsa();
-							risorsa.setId(Integer.parseInt(tastiera.nextLine()));
+							if(sottoopzione.equals("2")){
+								System.out.println("Inserisci id pianeta:");
+								risorsa.setId(Integer.parseInt(tastiera.nextLine()));
+								System.out.println("Nuovi dati:");
+							}
 							System.out.println("Inserisci nome risorsa:");
 							((Risorsa)risorsa).setNome(tastiera.nextLine());
 							System.out.println("Inserisci descrizione risorsa:");
 							((Risorsa)risorsa).setValore(Integer.parseInt(tastiera.nextLine()));
 							risorsa = a.modificaCreaRisorsa(risorsa);
-							if(sottoopzione == "2")
+							if(risorsa == null)
+								sottorisposta = "Errore nei dati.";
+							else if(sottoopzione.equals("2"))
 								sottorisposta = "Pianeta modificato: " + risorsa.toString();
 							else 
 								sottorisposta = "Pianeta aggiunto: " + risorsa.toString();
@@ -396,7 +417,7 @@ public class Main {
 						+ "2)Modifica numero.\n"
 						+ "3)Aggiungi numero.\n"
 						+ "4)Elimina numero.\n";
-				sottomenu1 += "0)Esci";
+				sottomenu1 += "0)Indietro";
 				sottoopzione = "";
 				
 				do {//do while gestito da sottoopzione
@@ -422,8 +443,11 @@ public class Main {
 					case "3": //aggiungi numero
 						try{
 							numero = new Rubrica();
-							System.out.println("Inserisci numero:");
-							numero.setId(Integer.parseInt(tastiera.nextLine()));
+							if(sottoopzione.equals("2")) {
+								System.out.println("Inserisci numero:");
+								numero.setId(Integer.parseInt(tastiera.nextLine()));
+								System.out.println("Nuovi dati:");
+							}
 							System.out.println("Inserisci percorso foto:");
 							((Rubrica)numero).setFoto(tastiera.nextLine());
 							System.out.println("Inserisci citta numero:");
@@ -431,7 +455,9 @@ public class Main {
 							System.out.println("Inserisci indirizzo numero:");
 							((Rubrica)numero).setIndirizzo(tastiera.nextLine());
 							numero = a.modificaCreaRubrica(numero);
-							if(sottoopzione == "2")
+							if(numero == null)
+								sottorisposta = "Errore nei dati.";
+							else if(sottoopzione.equals("2"))
 								sottorisposta = "Numero modificato: " + numero.toString();
 							else
 								sottorisposta = "Numero aggiunto: " + numero.toString();
@@ -490,7 +516,6 @@ public class Main {
 				int index = 0;
 				String sottomenu[] = {sottomenu1, sottomenu2, sottomenu3};
 				sottoopzione = "";
-				
 				
 				do {//rispostasotto gestisce questo do while
 					

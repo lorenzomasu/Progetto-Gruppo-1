@@ -39,21 +39,34 @@ public class DAOEsseri implements IDAO, IDAOEsseri{
 
 	@Override
 	public Entity load(BigInteger id) {
-		Entity ris = new Essere();
-		ris.fromMap(db.row(read.replace("tabella",nometabella).replace("?", id+"")));
-		return ris;
+		try {
+			Entity ris = new Essere();
+			ris.fromMap(db.row(read.replace("tabella",nometabella).replace("?", id+"")));
+			return ris;
+		} catch(Exception exc) {
+			return null;
+		}
 	}
 
 	@Override
 	public Entity load(Entity e) {
-		BigInteger id = null;
-		String query="";
-		if(e.getId()!=null) // la mia entity esiste gia nel db
-			query = update.replace("tabella", nometabella).replace("[id]", e.getId()+"");
-		else
-			query = insert.replace("tabella", nometabella);
-		id = db.update(query, e.toMap());
-		return load(id);
+		try{
+			Entity ris = null;
+			BigInteger id = null;
+			String query="";
+			if(e.getId()!=null) // la mia entity esiste gia nel db
+				query = update.replace("tabella", nometabella).replace("[id]", e.getId()+"");
+			else
+				query = insert.replace("tabella", nometabella);
+			id = db.update(query, e.toMap());
+			if(e.getId()==null)
+				ris = load(id);
+			else
+				ris = load(e.getId());
+			return ris;
+		} catch(Exception exc) {
+			return null;
+		}
 	}
 
 	@Override
