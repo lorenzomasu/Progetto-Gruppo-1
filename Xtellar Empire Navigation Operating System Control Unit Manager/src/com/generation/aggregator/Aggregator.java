@@ -53,6 +53,11 @@ public class Aggregator implements IAggregator{
 		return instance;
 	}
 	
+	/**
+	 * prende l'istanza dell'aggregator e la torna.
+	 * @param chiave instance dell'aggregator
+	 * @return
+	 */
 	public Object get(String chiave) {
 		return dependencies.get(chiave);
 	}
@@ -61,6 +66,11 @@ public class Aggregator implements IAggregator{
 	 * RICORDARSI DI METTERE CERCA, MODIFICA, CARICA ED ELIMINA PER OGNI SINGOLA ENTITY
 	 */
 	
+	/**
+	 * cerca 
+	 * @param id
+	 * @return
+	 */
 	public Entity cercaEssere(int id) {
 		return  ((DAOEsseri) getInstance().get("daoesseri")).load(BigInteger.valueOf(id));
 	}
@@ -157,12 +167,19 @@ public class Aggregator implements IAggregator{
 	
 	/*
 	 * CRUD
+	 * 
+	 */
+	/**
+	 * ritorno il numero di persone presenti nella citta in ingresso
 	 */
 	@Override
 	public int numeriCitta(String citta) {
 		return ((DAORubrica)getInstance().get("daorubrica")).elencoNumeri(citta).size();
 	}
-
+/**
+ * ritorno la lista di razze con la caratteristica richiesta presente nella loro descrizione
+ * @author Ivan Capra
+ */
 	@Override
 	public List<Razza> esiste(String caratteristica) {
 		List<Entity> test = ((DAORazze)getInstance().get("daorazze")).esiste(caratteristica);
@@ -171,22 +188,35 @@ public class Aggregator implements IAggregator{
 			ris.add((Razza)e);
 		return ris;
 	}
-
+/**
+ * ritorno la grandezza media di tutti i pianeti dell'impero
+ * @author Ivan Capra
+ */
 	@Override
 	public double grandezzaMediaPianeti() {
 		return ((DAOPianeti) getInstance().get("daopianeti")).grandezzaMediaPianeti();
 	}
-
+/**
+ * ritorno la grandezza totale di tutti i pianeti dell'impero
+ * @author Ivan Capra
+ */
 	@Override
 	public int grandezzaTotalePianeti() {
 		return ((DAOPianeti) getInstance().get("daopianeti")).grandezzaTotalePianeti();
 	}
-
+/**
+ * ritorno vero se esiste gia' un pianeta con quel nome, false se non esiste
+ * @author Ivan Capra
+ */
 	@Override
 	public boolean doppione(String nome) {
 		return ((DAOPianeti) getInstance().get("daopianeti")).doppione(nome);
 	}
-
+/**
+ * ritorno il o i pianeti piu grande nell'impero
+ * null se non ci sono pianeti
+ * @author Ivan Capra
+ */
 	@Override
 	public List<Pianeta> pianetaPiuGrande() {
 		List<Entity> pianeti = ((DAOPianeti) getInstance().get("daopianeti")).pianetaPiuGrande();
@@ -196,7 +226,11 @@ public class Aggregator implements IAggregator{
 		}
 		return p;
 	}
-
+/**
+ * ritorno il o i pianeti piu piccoli nell'impero
+ * null se non ci sono pianeti
+ * @author Ivan Capra
+ */
 	@Override
 	public List<Pianeta> pianetaPiuPiccolo() {
 		List<Entity> pianeti = ((DAOPianeti) getInstance().get("daopianeti")).pianetaPiuPiccolo();
@@ -206,47 +240,87 @@ public class Aggregator implements IAggregator{
 		}
 		return p;
 	}
-
+/**
+ * ritorno l'eta' media nell'impero
+ * @author Ivan Capra
+ */
 	@Override
 	public double etaMedia() {
 		return ((DAOEsseri) getInstance().get("daoesseri")).etaMedia();
 	}
 
+	/**
+	 * ritorno l'eta' massima nell'impero
+	 * @author Ivan Capra
+	 */
 	@Override
 	public int etaMassima() {
 		return ((DAOEsseri) getInstance().get("daoesseri")).etaMassima();
 	}
 
+	/**
+	 * ritorno l'eta' minima dell'impero
+	 * @author Ivan Capra
+	 */
 	@Override
 	public int etaMinima() {
 		return ((DAOEsseri) getInstance().get("daoesseri")).etaMinima();
 	}
 
+	/**
+	 * ritorno il numero di ripetizioni del cognome, 0 se non trovato
+	 * @author Ivan Capra
+	 */
+	
 	@Override
 	public int ripetizioneCognome(String cognome) {
 		return  ((DAOEsseri) getInstance().get("daoesseri")).ripetizioneCognome(cognome); 
 	}
-
+	
+	/**
+	 * ritorno il valore medio delle risorse dell'impero
+	 * @author Ivan Capra 
+	 */
 	@Override
 	public double valoreMedioRisorse() {
 		return ((DAORisorse)getInstance().get("daorisorse")).valoreMedioRisorse();
 	}
 
+	/**
+	 * ritorno il valore della risorsa cercata, -1 se non trovata
+	 */
 	@Override
 	public int valoreRisorsa(String nomeRisorsa) {
 		return ((DAORisorse)getInstance().get("daorisorse")).valoreRisorsa(nomeRisorsa);
 	}
 
+	/**
+	 * ritorno la citta del numero cercato, 
+	 * null se non trovato
+	 * @author Gary Garcia
+	 */
+	
 	@Override
 	public String cittaDelNumero(int numero) {
-		return null;
+		return ((DAORubrica)getInstance().get("daorubrica")).cittaDelNumero(numero);
 	}
 
+	
+	/**
+	 * ritorno l'indirizzo del numero cercato,
+	 * null se non lo trova
+	 * @author Gary Garcia
+	 */
 	@Override
 	public String indirizzoDelNumero(int numero) {
-		// TODO Auto-generated method stub
-		return null;
+		return ((DAORubrica) getInstance().get("daorubrica")).indirizzoDelNumero(numero);
 	}
+	
+	/**
+	 * ritorno i dettagli interi del numero cercato: il pianeta, la citta' e l'indirizzo, la razza e l'essere che ce l'ha
+	 * "nessun numero trovato" se non lo trovo
+	 * @author Ivan Capra
+	 */
 
 	@Override
 	public String dettagliNumero(int numero) {
@@ -264,6 +338,12 @@ public class Aggregator implements IAggregator{
 		return p.toString() +", " + cittaDelNumero(numero) + ", " + indirizzoDelNumero(numero) + ", " + r.toString() + ", " + essere.toString(); 
 	}
 
+	/**
+	 * Ritorno la quantita' di una risorsa nell'impero
+	 * -1 se la risorsa non e' stata trovata
+	 *  @author Ivan Capra
+	 */
+	
 	@Override
 	public int quantitaRisorsaImpero(String nomeRisorsa) {
 		List<Entity> contiene = ((DAOContiene)getInstance().get("daocontiene")).list();
@@ -285,19 +365,28 @@ public class Aggregator implements IAggregator{
 		return tot;
 	}
 
-	
+	/**
+	 * ritorno la popolazione intera dell'impero
+	 * @author Ivan Capra
+	 */
 	@Override
 	public int popolazioneTotaleImpero() {
 		return ((DAORazze)getInstance().get("daorazze")).list().size();
 	}
 
+	/**
+	 * ritorno la distanza tra due pianeti, null se uno dei due non esiste
+	 * @author Ivan Capra
+	 */
 	@Override
 	public String distanzaPianeti(String nomea, String nomeb) {
 		return  ((DAOPianeti)getInstance().get("daopianeti")).distanzaPianeti(nomea, nomeb) ;
 	}
 
 	/**
+	 * ritorno la lista di razze che vivono su un pianeta
 	 * ritorna nullo se il pianeta non esiste
+	 * @author Ivan Capra
 	 */
 	@Override
 	public List<Razza> razzeSuPianeta(String p) {
@@ -331,7 +420,9 @@ public class Aggregator implements IAggregator{
 	}
 
 	/**
+	 * ritorno la lista di pianeti con una certa razza
 	 * ritorna null se la razza non esiste, lista size 0 se nessun pianeta ha quella razza
+	 * @author Ivan Capra
 	 */
 	@Override
 	public List<Pianeta> pianetiConRazza(String r) {
@@ -366,6 +457,7 @@ public class Aggregator implements IAggregator{
 
 	/**
 	 * ritorna il numero di esseri per quella razza, -1 se razza non esiste
+	 * @author Ivan Capra
 	 */
 	@Override
 	public int popolazioneRazza(String r) {
@@ -391,6 +483,7 @@ public class Aggregator implements IAggregator{
 	/**
 	 * ritorna il numero di persone su un pianeta
 	 * -1 se il pianeta non e' stato trovato
+	 * @author Ivan Capra
 	 */
 	@Override
 	public int popolazionePianeta(String p) {
@@ -412,6 +505,12 @@ public class Aggregator implements IAggregator{
 		}
 		return tot;
 	}
+	
+	/**
+	 * ritorna la lista delle risorse piu' presenti nell'impero, piu di una nel caso siano in parita'
+	 * null se non trova risorse
+	 * @author Ivan Capra
+	 */
 	
 	public List<Risorsa> risorsaPiuPresente() {
 		List<Entity> contiene = ((DAOContiene)getInstance().get("daocontiene")).list();
@@ -450,6 +549,7 @@ public class Aggregator implements IAggregator{
 	/**
 	 * ritorno la lista di risorse su un pianeta
 	 * ritorno null se il pianeta non esiste, vuoto se la risorsa non e' su nessun pianeta
+	 * @author Ivan Capra
 	 */
 	@Override
 	public List<Risorsa> risorsePianeta(String p) {
@@ -474,6 +574,7 @@ public class Aggregator implements IAggregator{
 	/**
 	 * ritorno la lista di pianeti con una certa risorsa
 	 * ritorno null se la risorsa non esiste, vuota se nessun pianeta ce l'ha
+	 * @author Ivan Capra
 	 */
 	
 	@Override

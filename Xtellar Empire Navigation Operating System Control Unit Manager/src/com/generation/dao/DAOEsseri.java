@@ -12,12 +12,19 @@ import com.generation.entities.Essere;
 public class DAOEsseri implements IDAO, IDAOEsseri{
 	private IDatabase db;
 	private String nometabella = "esseri";
-	
+	/**
+	 * in ingresso parametro db per fare una sola connessione
+	 * @param db
+	 * @author Ivan Capra
+	 */
 	
 	public DAOEsseri (IDatabase db) {
 		this.db = db;
 	}
-	
+	/**
+	 * ritorno la lista di entity ricavate dalla query in ingresso
+	 * @author Ivan Capra
+	 */
 	public List<Entity> list(String filtro)
 	{
 		List<Entity> ris = new SmartList<Entity>();
@@ -30,13 +37,19 @@ public class DAOEsseri implements IDAO, IDAOEsseri{
 		}
 		return ris;
 	}
-	
+	/**
+	 * ritorno la lista completa di entity della tabella
+	 * @author Ivan Capra
+	 */
 	@Override
 	public List<Entity> list() {
 		String query = read.replace("tabella", nometabella).replace("where id = ?;", "");
 		return list(query);
 	}
-
+/**
+ * ritorno entity con l'id in ingresso
+ * @author Ivan Capra
+ */
 	@Override
 	public Entity load(BigInteger id) {
 		try {
@@ -47,7 +60,11 @@ public class DAOEsseri implements IDAO, IDAOEsseri{
 			return null;
 		}
 	}
-
+/**
+ * carico nel database l'entity presa in ingresso, modificandola o creando una nuova.
+ * ritorno l'entity modificata se e' andato a buon fine
+ * @author Ivan Capra
+ */
 	@Override
 	public Entity load(Entity e) {
 		try{
@@ -68,34 +85,49 @@ public class DAOEsseri implements IDAO, IDAOEsseri{
 			return null;
 		}
 	}
-
+/**
+ * rimuovo dal database la riga con l'id in ingresso
+ * @author Ivan Capra
+ */
 	@Override
 	public boolean delete(BigInteger id) {
 		return db.update(delete.replace("tabella", nometabella).replace("[id]", id+"")) == null;
 	}
 	
-	
+	/**
+	 * trovo l'eta' media degli esseri
+	 * @author Ivan Capra
+	 */
 	@Override
 	public double etaMedia() {
 		String query = "select avg(anni) media from ("
 				+ "select (year(now()) - year(dob)) as anni from esseri) pippo;";
 		return Integer.parseInt(db.row(query).get("media"));
 	}
-
+/**
+ * ritorno l'eta' massima degli esseri
+ * @author Ivan Capra
+ */
 	@Override
 	public int etaMassima() {
 		String query = "select max(anni) massimo from ("
 				+ "select (year(now()) - year(dob)) as anni from esseri) pippo;";
 		return Integer.parseInt(db.row(query).get("massimo"));
 	}
-
+/**
+ * ritorno l'eta' minima degli esseri
+ * @author Ivan Capra
+ */
 	@Override
 	public int etaMinima() {
 		String query = "select min(anni) minimo from ("
 				+ "select (year(now()) - year(dob)) as anni from esseri) pippo;";
 		return Integer.parseInt(db.row(query).get("minimo"));
 	}
-
+/**
+ * ritorno il numero di ripetizioni di un certo cognome preso in ingresso
+ * @author Ivan Capra
+ */
 	@Override
 	public int ripetizioneCognome(String cognome) {
 		String query = "select count(*) conta from essere where cognome = '" + cognome + "'";
