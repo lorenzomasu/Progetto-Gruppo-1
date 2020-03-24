@@ -101,7 +101,11 @@ public class DAOPianeti implements IDAO, IDAOPianeti{
 	@Override
 	public double grandezzaMediaPianeti() {
 		String query = "select avg(grandezza) average from pianeti";
-		return Double.parseDouble(db.row(query).get("average"));
+		Map<String,String> test = db.row(query);
+		if(test!=null && test.get("average")!=null)
+			return Double.parseDouble(db.row(query).get("average"));
+		else
+			return 0;
 	}
 	/**
 	 * ritorno la grandezza totale dei pianeti dell'impero
@@ -109,7 +113,11 @@ public class DAOPianeti implements IDAO, IDAOPianeti{
 	@Override
 	public int grandezzaTotalePianeti() {	
 		String query = "select sum(grandezza) somma from pianeti";
-		return Integer.parseInt(db.row(query).get("somma"));
+		Map<String,String> test = db.row(query);
+		if(test!=null && test.get("somma")!=null)
+			return Integer.parseInt(db.row(query).get("somma"));
+		else
+			return 0;
 	}
 	/**
 	 * ritorno la distanza tra le coordinate di due pianeti
@@ -120,9 +128,15 @@ public class DAOPianeti implements IDAO, IDAOPianeti{
 		try{
 			String query = read.replace("tabella", nometabella).replace("id = ?;", "nome = '" + nomea + "'");
 			Pianeta a = (Pianeta)list(query).get(0);
+			if(a == null)
+				return "Nome pianeta 1 errato.";
+			if(a.getCoordinate() == null || a.getCoordinate().length()!=20)
+				return "Cordinate pianeta 1 errate.";
 			query = read.replace("tabella", nometabella).replace("id = ?;", "nome = '" + nomeb + "'");
 			Pianeta b = (Pianeta)list(query).get(0);
-			if(a.getCoordinate().length()!=20 || b.getCoordinate().length()!=20)
+			if(b == null)
+				return "Nome pianeta 2 errato.";
+			if(b.getCoordinate() == null || b.getCoordinate().length()!=20)
 				return "Coordinate pianeta errate.";
 			String ris = "";
 			for(int i=0;i<10;i++) {//ciclo delle lettere
@@ -156,7 +170,12 @@ public class DAOPianeti implements IDAO, IDAOPianeti{
 	@Override
 	public List<Entity> pianetaPiuGrande() {
 		String query = "select max(grandezza) massimo from pianeti";
-		int maggiore = Integer.parseInt(db.row(query).get("massimo"));
+		Map<String,String> test = db.row(query);
+		int maggiore = 0;
+		if(test!=null && test.get("massimo")!=null)
+			maggiore = Integer.parseInt(db.row(query).get("massimo"));
+		else
+			return null;
 		query = read.replace("tabella", nometabella).replace("id = ?;", "grandezza = " + maggiore + ";");
 		return list(query);
 	}
@@ -167,7 +186,12 @@ public class DAOPianeti implements IDAO, IDAOPianeti{
 	@Override
 	public List<Entity> pianetaPiuPiccolo() {
 		String query = "select min(grandezza) minimo from pianeti";
-		int minimo = Integer.parseInt(db.row(query).get("minimo"));
+		Map<String,String> test = db.row(query);
+		int minimo = 0;
+		if(test!=null && test.get("massimo")!=null)
+			minimo = Integer.parseInt(db.row(query).get("minimo"));
+		else
+			return null;
 		query = read.replace("tabella", nometabella).replace("id = ?;", "grandezza = " + minimo + ";");
 		return list(query);
 	}

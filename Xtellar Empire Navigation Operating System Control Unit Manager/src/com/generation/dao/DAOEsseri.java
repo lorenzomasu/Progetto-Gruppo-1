@@ -45,7 +45,8 @@ public class DAOEsseri implements IDAO, IDAOEsseri{
 	public List<Entity> list() {
 		String query = read.replace("tabella", nometabella).replace("where id = ?;", "");
 		return list(query);
-	}
+	}	
+	
 /**
  * ritorno entity con l'id in ingresso
  * @author Ivan Capra
@@ -102,7 +103,11 @@ public class DAOEsseri implements IDAO, IDAOEsseri{
 	public double etaMedia() {
 		String query = "select avg(anni) media from ("
 				+ "select (year(now()) - year(dob)) as anni from esseri) pippo;";
-		return Integer.parseInt(db.row(query).get("media"));
+		Map<String,String> test = db.row(query);
+		if(test!=null && test.get("media")!=null)
+			return Integer.parseInt(test.get("media"));
+		else
+			return -1;
 	}
 /**
  * ritorno l'eta' massima degli esseri
@@ -112,7 +117,11 @@ public class DAOEsseri implements IDAO, IDAOEsseri{
 	public int etaMassima() {
 		String query = "select max(anni) massimo from ("
 				+ "select (year(now()) - year(dob)) as anni from esseri) pippo;";
-		return Integer.parseInt(db.row(query).get("massimo"));
+		Map<String,String> test = db.row(query);
+		if(test!=null && test.get("massimo")!=null)
+			return Integer.parseInt(test.get("massimo"));
+		else
+			return -1;
 	}
 /**
  * ritorno l'eta' minima degli esseri
@@ -122,7 +131,11 @@ public class DAOEsseri implements IDAO, IDAOEsseri{
 	public int etaMinima() {
 		String query = "select min(anni) minimo from ("
 				+ "select (year(now()) - year(dob)) as anni from esseri) pippo;";
-		return Integer.parseInt(db.row(query).get("minimo"));
+		Map<String,String> test = db.row(query);
+		if(test!=null && test.get("minimo")!=null)
+			return Integer.parseInt(test.get("minimo"));
+		else
+			return -1;
 	}
 /**
  * ritorno il numero di ripetizioni di un certo cognome preso in ingresso
@@ -130,8 +143,12 @@ public class DAOEsseri implements IDAO, IDAOEsseri{
  */
 	@Override
 	public int ripetizioneCognome(String cognome) {
-		String query = "select count(*) conta from essere where cognome = '" + cognome + "'";
-		return Integer.parseInt(db.row(query).get("conta"));
+		String query = "select count(*) conta from esseri where cognome = '" + cognome + "'";
+		Map<String,String> test = db.row(query);
+		if(test!=null && test.get("conta")!=null)
+			return Integer.parseInt(db.row(query).get("conta"));
+		else
+			return 0;
 	}
 
 }

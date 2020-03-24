@@ -174,7 +174,11 @@ public class Aggregator implements IAggregator{
 	 */
 	@Override
 	public int numeriCitta(String citta) {
-		return ((DAORubrica)getInstance().get("daorubrica")).elencoNumeri(citta).size();
+		List<Entity> test = ((DAORubrica)getInstance().get("daorubrica")).elencoNumeri(citta);
+		if(test == null)
+			return 0;
+		else
+			return ((DAORubrica)getInstance().get("daorubrica")).elencoNumeri(citta).size();
 	}
 /**
  * ritorno la lista di razze con la caratteristica richiesta presente nella loro descrizione
@@ -220,6 +224,8 @@ public class Aggregator implements IAggregator{
 	@Override
 	public List<Pianeta> pianetaPiuGrande() {
 		List<Entity> pianeti = ((DAOPianeti) getInstance().get("daopianeti")).pianetaPiuGrande();
+		if(pianeti == null || pianeti.size() == 0)
+			return null;
 		List<Pianeta> p = new ArrayList<Pianeta>();
 		for(Entity e : pianeti) {
 			p.add((Pianeta)e);
@@ -234,6 +240,8 @@ public class Aggregator implements IAggregator{
 	@Override
 	public List<Pianeta> pianetaPiuPiccolo() {
 		List<Entity> pianeti = ((DAOPianeti) getInstance().get("daopianeti")).pianetaPiuPiccolo();
+		if(pianeti == null || pianeti.size() == 0)
+			return null;
 		List<Pianeta> p = new ArrayList<Pianeta>();
 		for(Entity e : pianeti) {
 			p.add((Pianeta)e);
@@ -392,6 +400,8 @@ public class Aggregator implements IAggregator{
 	public List<Razza> razzeSuPianeta(String p) {
 		List<Entity> pianeti = ((DAOPianeti)getInstance().get("daopianeti")).list();
 		Pianeta pia = null;
+		if(pianeti == null || pianeti.isEmpty())
+			return null;
 		for(Entity e : pianeti) {
 			if(((Pianeta)e).getNome().equalsIgnoreCase(p)) {
 				pia = (Pianeta)e;
@@ -403,7 +413,8 @@ public class Aggregator implements IAggregator{
 		List<Entity> esseri = ((DAOEsseri)getInstance().get("daoesseri")).list();
 		List<Entity> razze = ((DAORazze)getInstance().get("daorazze")).list();
 		List<Razza> risposta = new ArrayList<Razza>();
-		
+		if(razze == null || razze.isEmpty())
+			return null;
 		for(Entity e : esseri) {
 			if(((Essere)e).getIdpianeta() == pia.getId().intValue()) {
 				for(Entity pi : razze) {
@@ -489,6 +500,8 @@ public class Aggregator implements IAggregator{
 	public int popolazionePianeta(String p) {
 		List<Entity> pianeti = ((DAOPianeti)getInstance().get("daopianeti")).list();
 		Pianeta pia = null;
+		if(pianeti == null || pianeti.isEmpty())
+			return -1;
 		for(Entity e : pianeti) {
 			if(((Pianeta)e).getNome().equalsIgnoreCase(p)) {
 				pia = (Pianeta)e;
@@ -498,6 +511,8 @@ public class Aggregator implements IAggregator{
 		if(pia == null)
 			return -1;
 		List<Entity> esseri = ((DAOEsseri)getInstance().get("daoesseri")).list();
+		if(esseri == null || esseri.isEmpty())
+			return -1;
 		int tot=0;
 		for(Entity e : esseri) {
 			if(((Essere)e).getIdpianeta() == pia.getId().intValue())//if

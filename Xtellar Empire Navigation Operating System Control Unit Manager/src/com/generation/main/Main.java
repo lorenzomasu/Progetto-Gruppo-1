@@ -22,7 +22,6 @@ public class Main {
 		menuprincipale += "\n0)Esci";
 		Scanner tastiera = new Scanner(System.in);
 		String opzione = "";
-		String rispostasotto = "";
 		String sottomenu1 ="", sottomenu2 ="", sottomenu3="";
 		String sottoopzione = "";
 		String sottorisposta = "";
@@ -487,10 +486,10 @@ public class Main {
 								+ "2)Cerca caratteristica aliena\n"
 								+ "3)Grandezza media pianeti\t\t"
 								+ "4)Grandezza totale pianeti\n"
-								+ "5)Controllo nome pianeta esistente\t\t"
+								+ "5)Controllo nome pianeta esistente\t"
 								+ "6)Pianeta(i) piu' grande\n"
 								+ "7)Pianeta(i) piu' piccolo\t\t"
-								+ "8)Eta' media popolazione\n\t\t\t\t"
+								+ "8)Eta' media popolazione\n\t\t\t\t\t\t"
 								+ "9)Pagina successiva";
 				sottomenu1 += "\n0)Indietro";
 				sottomenu2 = "1)Eta massima popolazione\t\t"
@@ -503,13 +502,13 @@ public class Main {
 								+ "8)Popolazione totale impero\n"
 								+ "9)Pagina precedente\t\t10)Pagina successiva";
 				sottomenu2 += "\n0)Indietro";
-				sottomenu3 = "1)Risorsa piu' presente\t\t"
+				sottomenu3 = "1)Risorsa piu' presente\t\t\t"
 								+ "2)Distanza tra due pianeti\n"
 								+ "3)Razze su un certo pianeta\t\t"
 								+ "4)Pianeti con una certa razza\n"
 								+ "5)Popolazione totale razza\t\t"
 								+ "6)Popolazione totale pianeta\n"
-								+ "7)Risorse su un pianeta\t\t"
+								+ "7)Risorse su un pianeta\t\t\t"
 								+ "8)Pianeti con una certa risorsa\n"
 								+ "9)Pagine precedente";
 				sottomenu3 += "\n0)Indietro";
@@ -522,7 +521,7 @@ public class Main {
 					System.out.println(sottomenu[index]);
 					sottoopzione = tastiera.nextLine();
 					switch(index) {
-					case 1://pagina 1 del sottomenu
+					case 0://pagina 1 del sottomenu
 						switch(sottoopzione) {
 						case "1":// 1)Quantita numeri di una citta\t\t"
 							System.out.println("Inserisci il nome della citta:");
@@ -538,7 +537,7 @@ public class Main {
 							System.out.println("Inserisci la caratteristica aliena da ricercare:");
 							input = tastiera.nextLine();
 							List<Razza> razze = a.esiste(input);
-							if(razze.size()==0 || razze == null)
+							if(razze == null || razze.isEmpty())
 								sottorisposta = "Nessuna razza trovata";
 							else {
 								if(razze.size() == 1)
@@ -566,7 +565,7 @@ public class Main {
 							
 						case "6"://6)Pianeta(i) piu' grande
 							List<Pianeta> pianeti = a.pianetaPiuGrande();
-							if(pianeti.size() == 0 || pianeti == null)
+							if(pianeti == null || pianeti.isEmpty())
 								sottorisposta = "Nessun pianeta nell'impero.";
 							else{
 								if(pianeti.size() == 1)
@@ -580,7 +579,7 @@ public class Main {
 							
 						case "7"://7)Pianeta(i) piu' piccolo
 							pianeti = a.pianetaPiuPiccolo();
-							if(pianeti.size() == 0 || pianeti == null)
+							if( pianeti == null || pianeti.isEmpty())
 								sottorisposta = "Nessun pianeta nell'impero.";
 							else{
 								if(pianeti.size() == 1)
@@ -593,7 +592,7 @@ public class Main {
 							break;
 						
 						case "8"://8)Eta' media popolazione
-							if(a.etaMedia() == 0)
+							if(a.etaMedia() == -1)
 								sottorisposta = "Popolazione non trovata.";
 							else 
 								sottorisposta = "L'eta' media della popolazione equivale a: " + a.etaMedia();
@@ -603,21 +602,24 @@ public class Main {
 							index++;
 							sottorisposta = "---------------------------";
 							break;
+						case "0":
+							sottorisposta = "";
+							break;
 						default:
 							sottorisposta = "Errore nella selezione, riprovare.";
 							break;
 						}
 						break;
-					case 2://pagina 2 del sottomenu
+					case 1://pagina 2 del sottomenu
 						switch(sottoopzione) {
 						case "1"://1)Eta massima popolazione
-							if(a.etaMassima() == 0)
+							if(a.etaMassima() == -1)
 								sottorisposta = "Popolazione non trovata.";
 							else 
 								sottorisposta = "L'eta' massima della popolazione equivale a: " + a.etaMassima();
 							break;
 						case "2"://2)Eta minima popolazione
-							if(a.etaMinima() == 0)
+							if(a.etaMinima() == -1)
 								sottorisposta = "Popolazione non trovata.";
 							else 
 								sottorisposta = "L'eta' massima della popolazione equivale a: " + a.etaMinima();
@@ -625,10 +627,7 @@ public class Main {
 						case "3"://3)Numero ripetizioni cognome
 							System.out.println("Inserire il cognome da cercare:");
 							int r = a.ripetizioneCognome(tastiera.nextLine());
-							if(r == 0)
-								sottorisposta = "Cognome non trovato.";
-							else
-								sottorisposta = r + " ripetizioni trovate.";
+							sottorisposta = "Cognome con " + r + " ripetizioni.";
 							break;
 						case "4"://4)Valore medio delle risorse
 							if(a.valoreMedioRisorse() == 0)
@@ -648,6 +647,8 @@ public class Main {
 							try {
 								System.out.println("Inserisci il numero da cercare:");
 								sottorisposta = a.dettagliNumero(Integer.parseInt(tastiera.nextLine()));
+								if(sottorisposta == null || sottorisposta.isEmpty())
+									sottorisposta = "Numero non trovato";
 							} catch(Exception e) {
 								sottorisposta = "Inserimento numero errato.";
 								break;
@@ -676,20 +677,23 @@ public class Main {
 							index++;
 							sottorisposta = "---------------------------";
 							break;
+						case "0":
+							sottorisposta = "";
+							break;
 						default:
 							sottorisposta = "Errore nella seleziona, riprovare.";
 							break;
 						}
 						break;
 						
-					case 3://pagina 3 del sottomenu
+					case 2://pagina 3 del sottomenu
 						/*
 							+ "";
 						 */
 						switch(sottoopzione) {
 						case "1"://1)Risorsa piu' presente
 							List<Risorsa> ri = a.risorsaPiuPresente();
-							if(ri == null)
+							if(ri == null || ri.isEmpty())
 								sottorisposta = "Nessuna risorsa nell'impero.";
 							else if(ri.size() == 1) 
 								sottorisposta = "Risorsa piu' presente: " + ri.get(0).toString();
@@ -705,8 +709,8 @@ public class Main {
 							String pi = tastiera.nextLine();
 							System.out.println("Inserisci il nome del secondo pianeta:");
 							pi = a.distanzaPianeti(pi, tastiera.nextLine());
-							if(pi.isEmpty())
-								sottorisposta = "Pianeta non trovato.";
+							if(pi == null || pi.isEmpty())
+								sottorisposta = "Pianeta(i) non trovato(i).";
 							else
 								sottorisposta = "La distanza tra i due pianeti e' " + pi;
 							break;
@@ -715,7 +719,7 @@ public class Main {
 							System.out.println("Inserisci il nome del pianeta:");
 							List<Razza> r = a.razzeSuPianeta(tastiera.nextLine());
 							if(r == null)
-								sottorisposta = "Pianeta non esistente.";
+								sottorisposta = "Pianeta non esistente o senza razze.";
 							else if(r.isEmpty())
 								sottorisposta = "Pianeta vuoto.";
 							else if(r.size() == 1)
@@ -755,7 +759,7 @@ public class Main {
 						case "6"://6)Popolazione totale pianeta
 							System.out.println("Inserire nome del pianeta:");
 							test = a.popolazionePianeta(tastiera.nextLine());
-							if(test == 0)
+							if(test == -1)
 								sottorisposta = "Pianeta vuoto o non esistente.";
 							else
 								sottorisposta = "Il pianeta ha popolazione uguale a: " + test;
@@ -798,6 +802,9 @@ public class Main {
 							index--;
 							sottorisposta = "---------------------------";
 							break;
+						case "0":
+							sottorisposta = "";
+							break;
 						default:
 							sottorisposta = "Errore nella seleziona, riprovare.";
 							break;
@@ -805,7 +812,7 @@ public class Main {
 					break;//fine del sottomenu
 					}
 					System.out.println(sottorisposta);
-				}while(!rispostasotto.equalsIgnoreCase("0"));//uscita dal sottomenu
+				}while(!sottoopzione.equalsIgnoreCase("0"));//uscita dal sottomenu
 				//non c'e il break perche in questo modo la risposta verra annullata tramite lo 0
 				
 			case "0":
