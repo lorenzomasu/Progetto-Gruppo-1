@@ -45,7 +45,7 @@ public class Contiene extends Entity {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "idpianeta: " + getId() + "\nidrisorsa: " + idrisorse + ", \nquantita: " + quantita;

@@ -74,7 +74,10 @@ public class Essere extends Entity implements IEssere{
 		// TODO Auto-generated method stub
 		return false;
 	}
-
+	/**
+	 * ricavo l'eta' dalla dob dell'entity
+	 * @author Ivan Capra
+	 */
 	@Override
 	public int eta() {
 		return Calendar.YEAR - Integer.parseInt(String.valueOf(dob).split("-")[0]);

@@ -67,17 +67,32 @@ public class Aggregator implements IAggregator{
 	 */
 	
 	/**
-	 * cerca 
+	 * cerca l'essere con id preso in ingresso
 	 * @param id
 	 * @return
+	 * @author Ivan Capra
 	 */
 	public Entity cercaEssere(int id) {
 		return  ((DAOEsseri) getInstance().get("daoesseri")).load(BigInteger.valueOf(id));
 	}
 	
+	/**
+	 * modifica o crea l'essere tramite il dao
+	 * @param e
+	 * @return
+	 * @author Ivan Capra
+	 */
+	
 	public Entity modificaCreaEssere(Entity e) {
 		return ((DAOEsseri) getInstance().get("daoesseri")).load(e);
 	}
+	
+	/**
+	 * elimina l'essere dato l'id in ingresso
+	 * @param id
+	 * @return
+	 * @author Ivan Capra
+	 */
 	
 	public boolean eliminaEssere(int id) {
 		return ((DAOEsseri) getInstance().get("daoesseri")).delete(BigInteger.valueOf(id));
@@ -85,14 +100,31 @@ public class Aggregator implements IAggregator{
 	
 	
 	
+	/**
+	 * cerca il pianeta con id preso in ingresso
+	 * @param id
+	 * @return
+	 * @author Ivan Capra
+	 */
 	
 	public Entity cercaPianeta(int id) {
 		return  ((DAOPianeti) getInstance().get("daopianeti")).load(BigInteger.valueOf(id));
 	}
-	
+	/**
+	 * modifica o crea il pianeta tramite il dao
+	 * @param e
+	 * @return
+	 * @author Ivan Capra
+	 */
 	public Entity modificaCreaPianeta(Entity e) {
 		return ((DAOPianeti) getInstance().get("daopianeti")).load(e);
 	}
+	/**
+	 * elimina il pianeta dato l'id in ingresso
+	 * @param id
+	 * @return
+	 * @author Ivan Capra
+	 */
 	
 	public boolean eliminaPianeta(int id) {
 		return ((DAOPianeti) getInstance().get("daopianeti")).delete(BigInteger.valueOf(id));
@@ -100,32 +132,74 @@ public class Aggregator implements IAggregator{
 	
 	
 	
+	/**
+	 * cerca la razza con id preso in ingresso
+	 * @param id
+	 * @return
+	 * @author Ivan Capra
+	 */
 	
 	public Entity cercaRazza(int id) {
 		return  ((DAORazze) getInstance().get("daorazze")).load(BigInteger.valueOf(id));
 	}
-	
+	/**
+	 * modifica o crea la razza tramite il dao
+	 * @param e
+	 * @return
+	 * @author Ivan Capra
+	 */
 	public Entity modificaCreaRazza(Entity e) {
 		return ((DAORazze) getInstance().get("daorazze")).load(e);
 	}
-	
+	/**
+	 * elimina la razza dato l'id in ingresso
+	 * @param id
+	 * @return
+	 * @author Ivan Capra
+	 */
 	public boolean eliminaRazza(int id) {
 		return ((DAORazze) getInstance().get("daorazze")).delete(BigInteger.valueOf(id));
 	}
 	
+	/**
+	 * cerca la risorsa con id preso in ingresso
+	 * @param id
+	 * @return
+	 * @author Ivan Capra
+	 */
+	
 	public Entity cercaRisorsa(int id) {
 		return  ((DAORisorse) getInstance().get("daorisorse")).load(BigInteger.valueOf(id));
 	}
+	/**
+	 * modifica o crea la risorsa tramite il dao
+	 * @param e
+	 * @return
+	 * @author Ivan Capra
+	 */
 	
 	public Entity modificaCreaRisorsa(Entity e) {
 		return ((DAORisorse) getInstance().get("daorisorse")).load(e);
 	}
+	/**
+	 * elimina la risorsa dato l'id in ingresso
+	 * @param id
+	 * @return
+	 * @author Ivan Capra
+	 */
 	
 	public boolean eliminaRisorsa(int id) {
 		return ((DAORisorse) getInstance().get("daorisorse")).delete(BigInteger.valueOf(id));
 	}
 	
-	
+	/**
+	 * modifica la risorsa appartenente ad un pianeta 
+	 * @param idpianeta da modificare
+	 * @param idrisorsadamodificare l'id da cambiare
+	 * @param idrisorsanuova il nuovo id
+	 * @return
+	 * @author Ivan Capra
+	 */
 	public Entity modificaRisorsaAPianeta(int idpianeta, int idrisorsadamodificare, int idrisorsanuova) {
 		Map<String, String> e = new HashMap<String,String>();
 		e.put("idpianeta", idpianeta+"");
@@ -135,7 +209,14 @@ public class Aggregator implements IAggregator{
 		modifica.put("idrisorse", idrisorsanuova+"");
 		return ((DAOContiene)getInstance().get("daocontiene")).load(e, modifica);
 	}
-	
+	/**
+	 * aggiunge una risorsa ad un pianeta
+	 * @param idpianeta il pianeta a cui aggiungere
+	 * @param idrisorsa l'id risorsa da aggiungere
+	 * @param quantita la quantita da cambiare
+	 * @return
+	 * @author Ivan Capra
+	 */
 	public Entity aggiungiRisorsaAPianeta(int idpianeta, int idrisorsa, int quantita) {
 		Map<String, String> e = new HashMap<String,String>();
 		e.put("idpianeta", idpianeta+"");
@@ -143,22 +224,44 @@ public class Aggregator implements IAggregator{
 		e.put("quantita", quantita+"");
 		return ((DAOContiene)getInstance().get("daocontiene")).load(e, null);
 	}
+	/**
+	 * elimino la risorsa da un pianeta
+	 * @param idpianeta pianeta da eliminare
+	 * @param idrisorsa risorsa da eliminare
+	 * @return
+	 * @author Ivan Capra
+	 */
 	
 	public boolean eliminaRisorsaPianeta(int idpianeta, int idrisorsa) {
 		return ((DAOContiene)getInstance().get("daocontiene")).deleteRisorsaDaPianeta(BigInteger.valueOf(idpianeta), BigInteger.valueOf(idrisorsa));
 	}
 	
 	
-	
+	/**
+	 * cerca numero nella rubrica
+	 * @param id
+	 * @return
+	 * @author Ivan Capra
+	 */
 	
 	public Entity cercaRubrica(int id) {
 		return  ((DAORubrica) getInstance().get("daorubrica")).load(BigInteger.valueOf(id));
 	}
-	
+	/**
+	 * modifica o crea numero nella rubrica
+	 * @param Entity
+	 * @return
+	 * @author Ivan Capra
+	 */
 	public Entity modificaCreaRubrica(Entity e) {
 		return ((DAORubrica) getInstance().get("daorubrica")).load(e);
 	}
-	
+	/**
+	 * elimina numero nella rubrica
+	 * @param id
+	 * @return
+	 * @author Ivan Capra
+	 */
 	public boolean eliminaRubrica(int id) {
 		return ((DAORubrica) getInstance().get("daorubrica")).delete(BigInteger.valueOf(id));
 	}

@@ -88,7 +88,13 @@ public class DAOContiene implements IDAO, IDAOContiene{
 		}
 		return valori;
 	}
-	
+	/**
+	 * cerco la riga del pianeta e della risorsa
+	 * @param idPianeta
+	 * @param idrisorsa
+	 * @return
+	 * @author Ivan Capra
+	 */
 	public Entity searchRow(BigInteger idPianeta, BigInteger idrisorsa) {
 		Map<String,String> f = db.row(read.replace("tabella",nometabella).replace("id = ?;", "idpianeta = " + idPianeta + " and idrisorse = " + idrisorsa));
 		Entity e = new Contiene();
@@ -146,15 +152,14 @@ public class DAOContiene implements IDAO, IDAOContiene{
 	 */
 	public Entity load(Map<String, String> e, Map<String,String> modifiche) {
 		try {
-			BigInteger id = null;
 			String query="";
 			if(e.get("idpianeta")!=null && e.get("idrisorse")!=null && modifiche!=null) { // la mia entity esiste gia nel db
 				query = update.replace("tabella", nometabella).replace("id = [id];", "idpianeta = " + e.get("idpianeta") + " and idrisorse = " + e.get("idrisorse"));
-				id = db.update(query, modifiche);
+				db.update(query, modifiche);
 			}
 			else if(e.get("idpianeta")!=null && e.get("idrisorse")!=null && modifiche==null){
 				query = insert.replace("tabella", nometabella);
-				id = db.update(query, e);
+				db.update(query, e);
 			}
 			if(modifiche == null)
 				return searchRow(BigInteger.valueOf(Long.valueOf(e.get("idpianeta"))), BigInteger.valueOf(Long.valueOf(e.get("idrisorse"))));

@@ -40,6 +40,12 @@ public class Pianeta extends Entity implements IPianeta{
 		// TODO Auto-generated method stub
 		return false;
 	}
+	
+	/**
+	 * ricavo la distanza tra il pianeta e la coordinata in ingresso.
+	 * coordinate: 10 lettere + 10 numeri, la distanza e' la differenza di ogni pezzo preso singolarmente
+	 * @author Ivan Capra
+	 */
 	@Override
 	public String distanza(String coordinata) {
 		if(this.getCoordinate().length()!=20 || coordinata.length()!=20)

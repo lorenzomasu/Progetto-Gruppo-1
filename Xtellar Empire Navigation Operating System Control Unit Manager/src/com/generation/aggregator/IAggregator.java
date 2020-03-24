@@ -1,13 +1,10 @@
 package com.generation.aggregator;
 
 import java.util.List;
-import java.util.Map;
 
 import com.generation.entities.*;
 
 public interface IAggregator {
-
-	
 	
 	public int numeriCitta(String citta);
 	
