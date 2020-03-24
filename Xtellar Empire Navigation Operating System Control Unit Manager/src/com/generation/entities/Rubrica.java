@@ -5,7 +5,7 @@ import java.math.BigInteger;
 import com.generation.base.Entity;
 
 public class Rubrica extends Entity implements IRubrica{
-	private int numero;
+	private int numero;//ho dovuto aggiungere questa variabile perchè il database o il mapper non riuscivano a gestirlo, e' sempre uguale all'id
 	private String foto, citta, indirizzo; //l'id dell'entity e' il numero di telefono
 	
 	public Rubrica() {}; 

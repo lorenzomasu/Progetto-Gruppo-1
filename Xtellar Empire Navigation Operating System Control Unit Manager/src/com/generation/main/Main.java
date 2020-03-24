@@ -104,6 +104,12 @@ public class Main {
 							sottorisposta = "Errore nella cancellazione.";
 						}
 						break;
+					case "0":
+						sottorisposta = "";
+						break;
+					default:
+						sottorisposta = "Errore nella selezione.";
+						break;
 					}
 					
 					System.out.println(sottorisposta);
@@ -172,6 +178,12 @@ public class Main {
 							sottorisposta = "Errore nella cancellazione.";
 						}
 						break;
+					case "0":
+						sottorisposta = "";
+						break;
+					default:
+						sottorisposta = "Errore nella selezione.";
+						break;
 					}
 					
 					System.out.println(sottorisposta);
@@ -225,8 +237,24 @@ public class Main {
 							((Pianeta)pianeta).setGrandezza(Integer.parseInt(tastiera.nextLine()));
 							System.out.println("Inserisci coordinate pianeta:");
 							((Pianeta)pianeta).setCoordinate(tastiera.nextLine());
-							pianeta = a.modificaCreaPianeta(pianeta);
-							if(pianeta == null)
+							boolean test = true;
+							if(((Pianeta)pianeta).getCoordinate().length()!=20)
+								test = false;
+							if(test) {
+								for(int i=0;i<10;i++) {
+									if(((Pianeta)pianeta).getCoordinate().toCharArray()[i]<'A' || ((Pianeta)pianeta).getCoordinate().toCharArray()[i]>'Z') {
+										test = false;
+										break;
+									}
+									if(((Pianeta)pianeta).getCoordinate().toCharArray()[i+10]<'0' || ((Pianeta)pianeta).getCoordinate().toCharArray()[i+10]>'9') {
+										test = false;
+										break;
+									}
+								}
+							}
+							if(test)
+								pianeta = a.modificaCreaPianeta(pianeta);
+							if(pianeta == null || !test)
 								sottorisposta = "Errore nei dati.";
 							else if(sottoopzione.equals("2"))
 								sottorisposta = "Pianeta modificato: " + pianeta.toString();
@@ -287,6 +315,12 @@ public class Main {
 							sottorisposta = "Errore nell'inserimento dati.";
 						}
 						
+						break;
+					case "0":
+						sottorisposta = "";
+						break;
+					default:
+						sottorisposta = "Errore nella selezione.";
 						break;
 					}
 					
@@ -405,6 +439,12 @@ public class Main {
 						}
 						
 						break;
+					case "0":
+						sottorisposta = "";
+						break;
+					default:
+						sottorisposta = "Errore nella selezione.";
+						break;
 					}
 					
 					System.out.println(sottorisposta);
@@ -474,6 +514,12 @@ public class Main {
 						} catch(Exception e) {
 							sottorisposta = "Errore nella cancellazione.";
 						}
+						break;
+					case "0":
+						sottorisposta = "";
+						break;
+					default:
+						sottorisposta = "Errore nella selezione.";
 						break;
 					}
 					
