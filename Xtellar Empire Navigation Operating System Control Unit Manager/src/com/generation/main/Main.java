@@ -489,18 +489,18 @@ public class Main {
 								+ "5)Controllo nome pianeta esistente\t"
 								+ "6)Pianeta(i) piu' grande\n"
 								+ "7)Pianeta(i) piu' piccolo\t\t"
-								+ "8)Eta' media popolazione\n\t\t\t\t\t\t"
+								+ "8)Eta' media popolazione\n\t\t\t\t\t"
 								+ "9)Pagina successiva";
 				sottomenu1 += "\n0)Indietro";
 				sottomenu2 = "1)Eta massima popolazione\t\t"
 								+ "2)Eta minima popolazione\n"
 								+ "3)Numero ripetizioni cognome\t\t"
 								+ "4)Valore medio delle risorse\n"
-								+ "5)Valore di una risorsa\t\t"
+								+ "5)Valore di una risorsa\t\t\t"
 								+ "6)Dettagli dato un numero\n"
-								+ "7)Quantita' risorsa\t\t"
+								+ "7)Quantita' risorsa\t\t\t"
 								+ "8)Popolazione totale impero\n"
-								+ "9)Pagina precedente\t\t10)Pagina successiva";
+								+ "9)Pagina precedente\t\t\t10)Pagina successiva";
 				sottomenu2 += "\n0)Indietro";
 				sottomenu3 = "1)Risorsa piu' presente\t\t\t"
 								+ "2)Distanza tra due pianeti\n"
@@ -751,7 +751,9 @@ public class Main {
 						case "5"://5)Popolazione totale razza
 							System.out.println("Inserisci il nome della razza:");
 							int test = a.popolazioneRazza(tastiera.nextLine());
-							if(test == 0)
+							if(test == -1)
+								sottorisposta = "Razza non trovata.";
+							else if(test == 0)
 								sottorisposta = "Razza con 0 popolazione.";
 							else
 								sottorisposta = "La razza ha una popolazione pari a: " + test;

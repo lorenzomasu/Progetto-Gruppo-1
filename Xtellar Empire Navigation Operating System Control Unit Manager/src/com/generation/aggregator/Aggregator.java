@@ -381,7 +381,7 @@ public class Aggregator implements IAggregator{
 	 */
 	@Override
 	public int popolazioneTotaleImpero() {
-		return ((DAORazze)getInstance().get("daoesseri")).list().size();
+		return ((DAOEsseri)getInstance().get("daoesseri")).list().size();
 	}
 
 	/**
@@ -476,6 +476,8 @@ public class Aggregator implements IAggregator{
 	public int popolazioneRazza(String r) {
 		List<Entity> razze = ((DAORazze)getInstance().get("daorazze")).list();
 		Razza raz = null;
+		if(razze == null)
+			return -1;
 		for(Entity e : razze) {
 			if(((Razza)e).getNome().equalsIgnoreCase(r)) {
 				raz = (Razza)e;
@@ -485,6 +487,8 @@ public class Aggregator implements IAggregator{
 		if(raz == null)
 			return -1;
 		List<Entity> esseri = ((DAOEsseri)getInstance().get("daoesseri")).list();
+		if(esseri == null || esseri.isEmpty())
+			return 0;
 		int tot=0;
 		for(Entity e : esseri) {
 			if(((Essere)e).getIdrazza() == raz.getId().intValue())//if
