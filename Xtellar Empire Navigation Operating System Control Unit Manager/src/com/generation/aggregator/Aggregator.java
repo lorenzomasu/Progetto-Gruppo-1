@@ -67,14 +67,18 @@ public class Aggregator implements IAggregator{
 	 */
 	
 	/**
-	 * cerca 
-	 * @param id
-	 * @return
-	 */
+	* ritorna una entity di tipo essere filtrata per l'id passato come parametro
+	* @author Gary Garcia
+	*/
 	public Entity cercaEssere(int id) {
 		return  ((DAOEsseri) getInstance().get("daoesseri")).load(BigInteger.valueOf(id));
 	}
 	
+	/**
+	 * metodo modificaCreaEssere,e gli prende direttamente dalla classe DAOEsseri e gli carica
+	 * @param e
+	 * @author Gary Garcia
+	 */
 	public Entity modificaCreaEssere(Entity e) {
 		return ((DAOEsseri) getInstance().get("daoesseri")).load(e);
 	}
