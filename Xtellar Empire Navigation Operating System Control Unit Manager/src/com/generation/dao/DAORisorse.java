@@ -8,7 +8,7 @@ import com.generation.base.Entity;
 import com.generation.base.SmartList;
 import com.generation.db.IDatabase;
 import com.generation.entities.Risorsa;
-import com.generation.entities.Rubrica;
+
 
 public class DAORisorse implements IDAO, IDAORisorse{
 	
