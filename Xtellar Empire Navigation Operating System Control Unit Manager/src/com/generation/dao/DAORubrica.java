@@ -16,31 +16,51 @@ public class DAORubrica implements IDAO, IDAORubrica{
 	public DAORubrica(IDatabase db) {
 		this.db = db; 
 	}
-
+	
+	/**
+	 * restituisce una stringa con il nome della città del numero passato come parametro
+	 * @author Lorenzo
+	 */
 	@Override
 	public String cittaDelNumero(int numero) {
 		String query = read.replace("tabella", "rubrica").replace("id = [id]", "numero = " + numero); 
 		return ((Rubrica)list(query).get(0)).getCitta(); 
 	}
-
+	
+	/**
+	 * restituisce una stringa con l'indirizzo del numero passato come parametro
+	 * @author Lorenzo
+	 */
 	@Override
 	public String indirizzoDelNumero(int numero) {
 		String query = read.replace("tabella", "rubrica").replace("id = [id]", "numero = " + numero); 
 		return ((Rubrica)list(query).get(0)).getIndirizzo();
 	}
 	
-	//data una cittﾃ� ritornare lista di numeri di quella citta
+	
+	/**
+	 * data una citta ritorna lista di numeri di quella citta
+	 * @author Lorenzo
+	 */
 	public List<Entity> elencoNumeri(String citta) {
 		String query = read.replace("*", "numero").replace("tabella", "rubrica").replace("id = [id]", "citta = '" + citta + "'"); 
 		return list(query); 
 	}
-
+	
+	/**
+	 * restituisce una lista di tutte le Entity
+	 * @author Lorenzo
+	 */
 	@Override
 	public List<Entity> list() {
 		String query = read.replace("tabella","rubrica").replace("where id = [id]", "");
 		return list(query);
 	}
-
+	
+	/**
+	 * restituisce una lista di tutte le Entity filtrate col parametro filtro (query)
+	 * @author Lorenzo
+	 */
 	@Override
 	public List<Entity> list(String filtro) {
 		List<Entity> ris = new SmartList<Entity>();
@@ -53,7 +73,11 @@ public class DAORubrica implements IDAO, IDAORubrica{
 		}
 		return ris;
 	}
-
+	
+	/**
+	 * ritorno entity con l'id in ingresso
+	 * @author Lorenzo
+	 */
 	@Override
 	public Entity load(BigInteger id) {
 		try {
@@ -65,7 +89,12 @@ public class DAORubrica implements IDAO, IDAORubrica{
 			return null;
 		}
 	}
-
+	
+	/**
+	 * carico nel database l'entity presa in ingresso, modificandola o creando una nuova.
+	 * ritorno l'entity modificata se e' andato a buon fine	 
+	 * @author Lorenzo
+	 */
 	@Override
 	public Entity load(Entity e) {
 		try {
@@ -88,7 +117,11 @@ public class DAORubrica implements IDAO, IDAORubrica{
 			return null;
 		}
 	}
-
+	
+	/**
+	 * cancella una Entity in base all'id passato come parametro
+	 * @author Lorenzo
+	 */
 	@Override
 	public boolean delete(BigInteger id) {
 		String query = delete.replace("tabella", "rubrica").replace("[id]",id+"");

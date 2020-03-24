@@ -16,7 +16,11 @@ public class DAORazze implements IDAO, IDAORazze {
 	public DAORazze(IDatabase db) {
 		this.db = db; 
 	}
-
+	
+	/**
+	 * ritorna una lista di Entity dove la descrizione è uguale alla caratteristica passata come paramentro
+	 * @author Lorenzo
+	 */
 	@Override
 	public List<Entity> esiste(String caratteristica) {
 		String query = read.replace("tabella", "razze").replace("id = ?", "descrizione = '" + caratteristica + "'");
@@ -25,12 +29,20 @@ public class DAORazze implements IDAO, IDAORazze {
 		return null;
 	}
 
+	/**
+	 * restituisce una lista di tutte le Entity
+	 * @author Lorenzo
+	 */
 	@Override
 	public List<Entity> list() {
 		String query = read.replace("tabella","razze").replace("where id = ?", "");
 		return list(query);
 	}
 
+	/**
+	 * restituisce una lista di tutte le Entity filtrate col parametro filtro (query)
+	 * @author Lorenzo
+	 */
 	@Override
 	public List<Entity> list(String filtro) {
 		List<Entity> ris = new SmartList<Entity>();
@@ -45,6 +57,10 @@ public class DAORazze implements IDAO, IDAORazze {
 		return ris;
 	}
 
+	/**
+	 * ritorno entity con l'id in ingresso
+	 * @author Lorenzo
+	 */
 	@Override
 	public Entity load(BigInteger id) {
 		try{
@@ -58,6 +74,11 @@ public class DAORazze implements IDAO, IDAORazze {
 		}
 	}
 
+	/**
+	 * carico nel database l'entity presa in ingresso, modificandola o creando una nuova.
+	 * ritorno l'entity modificata se e' andato a buon fine	 
+	 * @author Lorenzo
+	 */
 	@Override
 	public Entity load(Entity e) {
 		try{
@@ -80,6 +101,10 @@ public class DAORazze implements IDAO, IDAORazze {
 		}
 	}
 
+	/**
+	 * cancella una Entity in base all'id passato come parametro
+	 * @author Lorenzo
+	 */
 	@Override
 	public boolean delete(BigInteger id) {
 		String query = delete.replace("tabella", "razze").replace("[id]",id+"");

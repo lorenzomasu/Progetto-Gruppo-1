@@ -8,7 +8,7 @@ import com.generation.base.Entity;
 import com.generation.base.SmartList;
 import com.generation.db.IDatabase;
 import com.generation.entities.Risorsa;
-import com.generation.entities.Rubrica;
+
 
 public class DAORisorse implements IDAO, IDAORisorse{
 	
@@ -19,12 +19,20 @@ public class DAORisorse implements IDAO, IDAORisorse{
 		this.db = db;
 	}
 
+	/**
+	 * ritorna la media del valore di tutte le risorse
+	 * @author Lorenzo
+	 */
 	@Override
 	public double valoreMedioRisorse() {
 		String query = read.replace("*", "avg(valore) valMedio").replace("tabella", "risorse").replace("where id = [id]", ""); 
 		return Double.parseDouble(db.row(query).get("valMedio"));
 	}
-
+	
+	/**
+	 * ritorna la media del valore della risorsa passata come parametro
+	 * @author Lorenzo
+	 */
 	@Override
 	public int valoreRisorsa(String nomeRisorsa) {
 		String query = read.replace("*", "valore").replace("tabella", "risorse").replace("id = [id]", "nome = '" + nomeRisorsa + "'");
@@ -33,12 +41,20 @@ public class DAORisorse implements IDAO, IDAORisorse{
 		return ((Risorsa)e).getValore(); 
 	}
 
+	/**
+	 * restituisce una lista di tutte le Entity
+	 * @author Lorenzo
+	 */
 	@Override
 	public List<Entity> list() {
 		String query = read.replace("tabella","risorse").replace("where id = [id]", "");
 		return list(query);
 	}
 
+	/**
+	 * restituisce una lista di tutte le Entity filtrate col parametro filtro (query)
+	 * @author Lorenzo
+	 */
 	@Override
 	public List<Entity> list(String filtro) {
 		List<Entity> ris = new SmartList<Entity>();
@@ -52,6 +68,10 @@ public class DAORisorse implements IDAO, IDAORisorse{
 		return ris;
 	}
 
+	/**
+	 * ritorno entity con l'id in ingresso
+	 * @author Lorenzo
+	 */
 	@Override
 	public Entity load(BigInteger id) {
 		try {
@@ -64,6 +84,11 @@ public class DAORisorse implements IDAO, IDAORisorse{
 		}
 	}
 
+	/**
+	 * carico nel database l'entity presa in ingresso, modificandola o creando una nuova.
+	 * ritorno l'entity modificata se e' andato a buon fine	 
+	 * @author Lorenzo
+	 */
 	@Override
 	public Entity load(Entity e) {
 		try{
@@ -88,6 +113,10 @@ public class DAORisorse implements IDAO, IDAORisorse{
 		}
 	}
 
+	/**
+	 * cancella una Entity in base all'id passato come parametro
+	 * @author Lorenzo
+	 */
 	@Override
 	public boolean delete(BigInteger id) {
 		String query = delete.replace("tabella", "risorse").replace("[id]",id+"");
