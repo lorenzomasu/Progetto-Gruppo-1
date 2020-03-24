@@ -105,7 +105,7 @@ public class DAOEsseri implements IDAO, IDAOEsseri{
 				+ "select (year(now()) - year(dob)) as anni from esseri) pippo;";
 		Map<String,String> test = db.row(query);
 		if(test!=null && test.get("media")!=null)
-			return Integer.parseInt(test.get("media"));
+			return Double.parseDouble(test.get("media"));
 		else
 			return -1;
 	}

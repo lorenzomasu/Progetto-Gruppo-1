@@ -185,7 +185,7 @@ public class DAOPianeti implements IDAO, IDAOPianeti{
 		String query = "select min(grandezza) minimo from pianeti";
 		Map<String,String> test = db.row(query);
 		int minimo = 0;
-		if(test!=null && test.get("massimo")!=null)
+		if(test!=null && test.get("minimo")!=null)
 			minimo = Integer.parseInt(db.row(query).get("minimo"));
 		else
 			return null;

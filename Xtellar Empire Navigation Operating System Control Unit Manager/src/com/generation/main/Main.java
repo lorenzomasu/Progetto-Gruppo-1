@@ -8,6 +8,14 @@ import com.generation.aggregator.*;
 import com.generation.base.Entity;
 import com.generation.entities.*;
 
+/*
+ * Bug ancora presenti:
+ * la dob dell'essere non viene presa dal database in quanto la classe mapper non riesce a gestirla
+ * nel caso di password errata del database da eccezione in quanto la classe database non la tira e non possiamo gestirla
+ * 
+ * 
+ */
+
 public class Main {
 
 	public static void main(String[] args) {

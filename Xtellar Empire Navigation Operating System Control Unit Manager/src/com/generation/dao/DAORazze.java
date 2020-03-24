@@ -23,7 +23,7 @@ public class DAORazze implements IDAO, IDAORazze {
 	 */
 	@Override
 	public List<Entity> esiste(String caratteristica) {
-		String query = read.replace("tabella", "razze").replace("id = ?", "descrizione = '" + caratteristica + "'");
+		String query = read.replace("tabella", "razze").replace("id = ?", "descrizione like '%" + caratteristica + "%'");
 		if(list(query) != null)
 			return list(query); 
 		return null;
