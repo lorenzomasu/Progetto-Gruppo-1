@@ -187,6 +187,8 @@ public class Aggregator implements IAggregator{
 	@Override
 	public List<Razza> esiste(String caratteristica) {
 		List<Entity> test = ((DAORazze)getInstance().get("daorazze")).esiste(caratteristica);
+		if(test == null || test.isEmpty())
+			return null;
 		List<Razza> ris = new ArrayList<Razza>();
 		for(Entity e : test)
 			ris.add((Razza)e);
@@ -379,7 +381,7 @@ public class Aggregator implements IAggregator{
 	 */
 	@Override
 	public int popolazioneTotaleImpero() {
-		return ((DAORazze)getInstance().get("daorazze")).list().size();
+		return ((DAORazze)getInstance().get("daoesseri")).list().size();
 	}
 
 	/**
@@ -413,7 +415,7 @@ public class Aggregator implements IAggregator{
 		List<Entity> esseri = ((DAOEsseri)getInstance().get("daoesseri")).list();
 		List<Entity> razze = ((DAORazze)getInstance().get("daorazze")).list();
 		List<Razza> risposta = new ArrayList<Razza>();
-		if(razze == null || razze.isEmpty())
+		if(razze == null || razze.isEmpty() || esseri == null || esseri.isEmpty())
 			return null;
 		for(Entity e : esseri) {
 			if(((Essere)e).getIdpianeta() == pia.getId().intValue()) {
