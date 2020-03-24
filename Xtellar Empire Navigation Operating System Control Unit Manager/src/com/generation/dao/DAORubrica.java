@@ -23,8 +23,14 @@ public class DAORubrica implements IDAO, IDAORubrica{
 	 */
 	@Override
 	public String cittaDelNumero(int numero) {
-		String query = read.replace("tabella", "rubrica").replace("id = [id]", "numero = " + numero); 
-		return ((Rubrica)list(query).get(0)).getCitta(); 
+		String query = read.replace("tabella", "rubrica").replace("id = ?", "numero = " + numero); 
+		List<Entity> test = list(query);
+		if(test==null || test.isEmpty() || ((Rubrica)test.get(0)).getCitta() == null)
+			return "Numero non trovato";
+		else if(((Rubrica)test.get(0)).getCitta().isEmpty())
+			return "Nessuna citta' trovata";
+		else
+			return ((Rubrica)list(query).get(0)).getCitta(); 
 	}
 	
 	/**
@@ -33,8 +39,14 @@ public class DAORubrica implements IDAO, IDAORubrica{
 	 */
 	@Override
 	public String indirizzoDelNumero(int numero) {
-		String query = read.replace("tabella", "rubrica").replace("id = [id]", "numero = " + numero); 
-		return ((Rubrica)list(query).get(0)).getIndirizzo();
+		String query = read.replace("tabella", "rubrica").replace("id = ?", "numero = " + numero); 
+		List<Entity> test = list(query);
+		if(test==null || test.isEmpty() || ((Rubrica)test.get(0)).getIndirizzo() == null)
+			return "Numero non trovato";
+		else if(((Rubrica)test.get(0)).getIndirizzo().isEmpty())
+			return "Nessun indirizzo trovato";
+		else
+			return ((Rubrica)list(query).get(0)).getIndirizzo(); 
 	}
 	
 	
@@ -43,7 +55,7 @@ public class DAORubrica implements IDAO, IDAORubrica{
 	 * @author Lorenzo
 	 */
 	public List<Entity> elencoNumeri(String citta) {
-		String query = read.replace("*", "numero").replace("tabella", "rubrica").replace("id = [id]", "citta = '" + citta + "'"); 
+		String query = read.replace("*", "numero").replace("tabella", "rubrica").replace("id = ?", "citta = '" + citta + "'"); 
 		return list(query); 
 	}
 	
@@ -53,7 +65,7 @@ public class DAORubrica implements IDAO, IDAORubrica{
 	 */
 	@Override
 	public List<Entity> list() {
-		String query = read.replace("tabella","rubrica").replace("where id = [id]", "");
+		String query = read.replace("tabella","rubrica").replace("where id = ?", "");
 		return list(query);
 	}
 	
@@ -63,15 +75,19 @@ public class DAORubrica implements IDAO, IDAORubrica{
 	 */
 	@Override
 	public List<Entity> list(String filtro) {
-		List<Entity> ris = new SmartList<Entity>();
-		List<Map<String,String>> righe = db.rows(filtro);
-		for(Map<String,String> riga : righe)
-		{
-			Entity e = new Rubrica();
-			e.fromMap(riga);
-			ris.add(e);
+		try {
+			List<Entity> ris = new SmartList<Entity>();
+			List<Map<String,String>> righe = db.rows(filtro);
+			for(Map<String,String> riga : righe)
+			{
+				Entity e = new Rubrica();
+				e.fromMap(riga);
+				ris.add(e);
+			}
+			return ris;
+		} catch(Exception e) {
+			return null;
 		}
-		return ris;
 	}
 	
 	/**
@@ -81,7 +97,7 @@ public class DAORubrica implements IDAO, IDAORubrica{
 	@Override
 	public Entity load(BigInteger id) {
 		try {
-			String query = read.replace("tabella","rubrica").replace("[id]",id+"");
+			String query = read.replace("tabella","rubrica").replace("?",id+"");
 			Entity e = new Rubrica();
 			e.fromMap(db.row(query));
 			return e;

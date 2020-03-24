@@ -178,7 +178,7 @@ public class Aggregator implements IAggregator{
 		if(test == null)
 			return 0;
 		else
-			return ((DAORubrica)getInstance().get("daorubrica")).elencoNumeri(citta).size();
+			return test.size();
 	}
 /**
  * ritorno la lista di razze con la caratteristica richiesta presente nella loro descrizione
@@ -196,6 +196,7 @@ public class Aggregator implements IAggregator{
 	}
 /**
  * ritorno la grandezza media di tutti i pianeti dell'impero
+ * 0 se non ci sono pianeti
  * @author Ivan Capra
  */
 	@Override
@@ -204,6 +205,7 @@ public class Aggregator implements IAggregator{
 	}
 /**
  * ritorno la grandezza totale di tutti i pianeti dell'impero
+ * 0 se non ci sono pianeti
  * @author Ivan Capra
  */
 	@Override
@@ -336,6 +338,8 @@ public class Aggregator implements IAggregator{
 	public String dettagliNumero(int numero) {
 		List<Entity> esseri = ((DAOEsseri) getInstance().get("daoesseri")).list();
 		Essere essere = null;
+		if(esseri == null || esseri.isEmpty())
+			return "Popolazione non trovata.";
 		for(Entity e : esseri) {
 			if(((Essere)e).getIdnumero() == numero) {
 				essere = (Essere)e;
@@ -345,7 +349,7 @@ public class Aggregator implements IAggregator{
 			return "Nessun numero trovato.";
 		Pianeta p = (Pianeta) ((DAOPianeti) getInstance().get("daopianeti")).load(BigInteger.valueOf(essere.getIdpianeta()));
 		Razza r = (Razza) ((DAORazze)getInstance().get("daorazze")).load(BigInteger.valueOf(essere.getIdrazza()));
-		return p.toString() +", " + cittaDelNumero(numero) + ", " + indirizzoDelNumero(numero) + ", " + r.toString() + ", " + essere.toString(); 
+		return p.toString() +", " + cittaDelNumero(numero) + ", " + indirizzoDelNumero(numero) + ", " + r.toString() + ", " + essere.toString();
 	}
 
 	/**
