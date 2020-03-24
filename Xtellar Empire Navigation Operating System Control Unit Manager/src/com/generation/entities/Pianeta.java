@@ -59,7 +59,7 @@ public class Pianeta extends Entity implements IPianeta{
 
 	@Override
 	public String toString() {
-		return "ID: " +  getId() + "nome: " + nome + ", \ngrandezza: " + grandezza + ", \ncoordinate: " + coordinate;
+		return "ID: " +  getId() + "\nnome: " + nome + ", \ngrandezza: " + grandezza + ", \ncoordinate: " + coordinate;
 	}
 	
 	

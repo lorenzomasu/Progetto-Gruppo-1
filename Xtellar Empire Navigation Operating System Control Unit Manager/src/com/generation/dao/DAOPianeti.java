@@ -12,12 +12,19 @@ import com.generation.entities.Pianeta;
 public class DAOPianeti implements IDAO, IDAOPianeti{
 	private IDatabase db;
 	private String nometabella = "pianeti";
-	
+	/**
+	 * in ingresso parametro db per fare una sola connessione
+	 * @param db
+	 * @author Ivan Capra
+	 */
 	
 	public DAOPianeti(IDatabase db) {
 		this.db = db;
 	}
-	
+	/**
+	 * ritorno la lista di entity ricavate dalla query in ingresso
+	 * @author Ivan Capra
+	 */
 	public List<Entity> list(String filtro)
 	{
 		List<Entity> ris = new SmartList<Entity>();
@@ -30,13 +37,19 @@ public class DAOPianeti implements IDAO, IDAOPianeti{
 		}
 		return ris;
 	}
-	
+	/**
+	 * ritorno la lista completa di entity della tabella
+	 * @author Ivan Capra
+	 */
 	@Override
 	public List<Entity> list() {
 		String query = read.replace("tabella", nometabella).replace("where id = ?;", "");
 		return list(query);
 	}
-
+	/**
+	 * ritorno entity con l'id in ingresso
+	 * @author Ivan Capra
+	 */
 	@Override
 	public Entity load(BigInteger id) {
 		try {
@@ -47,7 +60,11 @@ public class DAOPianeti implements IDAO, IDAOPianeti{
 			return null;
 		}
 	}
-
+	/**
+	 * carico nel database l'entity presa in ingresso, modificandola o creando una nuova.
+	 * ritorno l'entity modificata se e' andato a buon fine
+	 * @author Ivan Capra
+	 */
 	@Override
 	public Entity load(Entity e) {
 		try{
@@ -68,33 +85,58 @@ public class DAOPianeti implements IDAO, IDAOPianeti{
 			return null;
 		}
 	}
-
+	/**
+	 * rimuovo dal database la riga con l'id in ingresso
+	 * @author Ivan Capra
+	 */
 	@Override
 	public boolean delete(BigInteger id) {
 		return db.update(delete.replace("tabella", nometabella).replace("[id]", id+"")) == null;
 	}
-	
+	/**
+	 * ritorno la grandezza media dei pianeti dell'impero
+	 * @author Ivan Capra
+	 */
 	
 	@Override
 	public double grandezzaMediaPianeti() {
 		String query = "select avg(grandezza) average from pianeti";
-		return Double.parseDouble(db.row(query).get("average"));
+		Map<String,String> test = db.row(query);
+		if(test!=null && test.get("average")!=null)
+			return Double.parseDouble(db.row(query).get("average"));
+		else
+			return 0;
 	}
-	
+	/**
+	 * ritorno la grandezza totale dei pianeti dell'impero
+	 */
 	@Override
 	public int grandezzaTotalePianeti() {	
 		String query = "select sum(grandezza) somma from pianeti";
-		return Integer.parseInt(db.row(query).get("somma"));
+		Map<String,String> test = db.row(query);
+		if(test!=null && test.get("somma")!=null)
+			return Integer.parseInt(db.row(query).get("somma"));
+		else
+			return 0;
 	}
-	
+	/**
+	 * ritorno la distanza tra le coordinate di due pianeti
+	 * @author Ivan Capra
+	 */
 	@Override
 	public String distanzaPianeti(String nomea, String nomeb) {
 		try{
 			String query = read.replace("tabella", nometabella).replace("id = ?;", "nome = '" + nomea + "'");
 			Pianeta a = (Pianeta)list(query).get(0);
+			if(a == null)
+				return "Nome pianeta 1 errato.";
+			if(a.getCoordinate() == null || a.getCoordinate().length()!=20)
+				return "Cordinate pianeta 1 errate.";
 			query = read.replace("tabella", nometabella).replace("id = ?;", "nome = '" + nomeb + "'");
 			Pianeta b = (Pianeta)list(query).get(0);
-			if(a.getCoordinate().length()!=20 || b.getCoordinate().length()!=20)
+			if(b == null)
+				return "Nome pianeta 2 errato.";
+			if(b.getCoordinate() == null || b.getCoordinate().length()!=20)
 				return "Coordinate pianeta errate.";
 			String ris = "";
 			for(int i=0;i<10;i++) {//ciclo delle lettere
@@ -112,26 +154,44 @@ public class DAOPianeti implements IDAO, IDAOPianeti{
 		}
 	}
 	/**
+	 * trovo se esiste gia un nome tra i pianeti
 	 * true se esiste gia, false se non esiste
+	 * @author Ivan Capra
 	 */
 	@Override
 	public boolean doppione(String nome) {
 		String query = read.replace("tabella", nometabella).replace("id = ?;", "nome = '" + nome + "';");
 		return list(query).size()!=0 ? true : false;
 	}
-	
+	/**
+	 * trovo il o i pianeti piu grandi dell'impero
+	 * @author Ivan Capra
+	 */
 	@Override
 	public List<Entity> pianetaPiuGrande() {
 		String query = "select max(grandezza) massimo from pianeti";
-		int maggiore = Integer.parseInt(db.row(query).get("massimo"));
+		Map<String,String> test = db.row(query);
+		int maggiore = 0;
+		if(test!=null && test.get("massimo")!=null)
+			maggiore = Integer.parseInt(db.row(query).get("massimo"));
+		else
+			return null;
 		query = read.replace("tabella", nometabella).replace("id = ?;", "grandezza = " + maggiore + ";");
 		return list(query);
 	}
-	
+	/**
+	 *trovo i o il pianeta piu piccolo dell'impero
+	 * @author Ivan Capra
+	 */
 	@Override
 	public List<Entity> pianetaPiuPiccolo() {
 		String query = "select min(grandezza) minimo from pianeti";
-		int minimo = Integer.parseInt(db.row(query).get("minimo"));
+		Map<String,String> test = db.row(query);
+		int minimo = 0;
+		if(test!=null && test.get("massimo")!=null)
+			minimo = Integer.parseInt(db.row(query).get("minimo"));
+		else
+			return null;
 		query = read.replace("tabella", nometabella).replace("id = ?;", "grandezza = " + minimo + ";");
 		return list(query);
 	}
