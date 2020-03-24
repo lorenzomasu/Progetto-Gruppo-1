@@ -19,7 +19,7 @@ public class Aggregator implements IAggregator{
 	 * costruttore aggregator, crea tutti i dao necessari e li mette in dependencies
 	 * @author Ivan Capra
 	 */
-	public Aggregator() {
+	private Aggregator() {
 		IDatabase db = Database.getInstance();
 		db.setPercorso("jdbc:mysql://localhost:3306/impero");
 		db.setUser("root");
@@ -359,6 +359,8 @@ public class Aggregator implements IAggregator{
 		List<Entity> contiene = ((DAOContiene)getInstance().get("daocontiene")).list();
 		List<Entity> risorse = ((DAORisorse)getInstance().get("daorisorse")).list();
 		int id = -1;
+		if(risorse == null || risorse.isEmpty())
+			return -1;
 		for(Entity risorsa : risorse) {
 			if(((Risorsa)risorsa).getNome().equalsIgnoreCase(nomeRisorsa)) {
 				id = risorsa.getId().intValue();
@@ -368,6 +370,8 @@ public class Aggregator implements IAggregator{
 		if(id == -1)
 			return -1;
 		int tot = 0;
+		if(contiene == null || contiene.isEmpty())
+			return 0;
 		for(Entity e : contiene) {
 			if(((Contiene)e).getIdrisorsa() == id)
 				tot += ((Contiene)e).getQuantita();
@@ -587,7 +591,7 @@ public class Aggregator implements IAggregator{
 		List<Entity> risorsa = ((DAOContiene)getInstance().get("daocontiene")).risorseSuPianeta(pia);
 		List<Risorsa> risorse = new ArrayList<Risorsa>();
 		for(Entity e : risorsa){
-			risorse.add((Risorsa)e);
+			risorse.add((Risorsa)((DAORisorse)getInstance().get("daorisorse")).load(BigInteger.valueOf(((Contiene)e).getIdrisorsa())));
 		}
 		return risorse;
 	}
@@ -602,6 +606,8 @@ public class Aggregator implements IAggregator{
 	public List<Pianeta> PianetiConRisorsa(String r) {
 		List<Entity> risorse = ((DAORisorse)getInstance().get("daorisorse")).list();
 		Risorsa risorsa = null;
+		if(risorse == null || risorse.isEmpty())
+			return null;
 		for(Entity e : risorse) {
 			if(((Risorsa)e).getNome().equalsIgnoreCase(r)) {
 				risorsa = (Risorsa) e;
@@ -610,12 +616,14 @@ public class Aggregator implements IAggregator{
 		}
 		if(risorsa == null)
 			return null;
-		List<Entity> pianeta = ((DAOContiene)getInstance().get("daocontiene")).pianetiConRisorsa(risorsa);
-		List<Pianeta> pianeti = new ArrayList<Pianeta>();
-		for(Entity e : pianeta) {
-			pianeta.add((Pianeta)e);
+		List<Entity> contiene = ((DAOContiene)getInstance().get("daocontiene")).pianetiConRisorsa(risorsa);
+		List<Pianeta> ris = new ArrayList<Pianeta>();
+		if(contiene == null || contiene.isEmpty())
+			return null;
+		for(Entity e : contiene) {
+			ris.add((Pianeta)((DAOPianeti)getInstance().get("daopianeti")).load(BigInteger.valueOf(((Contiene)e).getIdPianeta().longValue())));
 		}
-		return pianeti;
+		return ris;
 	}
 
 	

@@ -8,7 +8,6 @@ import com.generation.base.Entity;
 import com.generation.base.SmartList;
 import com.generation.db.IDatabase;
 import com.generation.entities.Risorsa;
-import com.generation.entities.Rubrica;
 
 public class DAORisorse implements IDAO, IDAORisorse{
 	
@@ -22,20 +21,28 @@ public class DAORisorse implements IDAO, IDAORisorse{
 	@Override
 	public double valoreMedioRisorse() {
 		String query = read.replace("*", "avg(valore) valMedio").replace("tabella", "risorse").replace("where id = [id]", ""); 
-		return Double.parseDouble(db.row(query).get("valMedio"));
+		Map<String,String> test = db.row(query);
+		if(test!=null && test.get("media")!=null)
+			return Double.parseDouble(db.row(query).get("valMedio"));
+		else
+			return 0;
 	}
 
 	@Override
 	public int valoreRisorsa(String nomeRisorsa) {
 		String query = read.replace("*", "valore").replace("tabella", "risorse").replace("id = [id]", "nome = '" + nomeRisorsa + "'");
 		Entity e = new Risorsa();
-		e.fromMap(db.row(query));
-		return ((Risorsa)e).getValore(); 
+		Map<String,String> test = db.row(query);
+		if(test!=null && test.get("media")!=null)
+			e.fromMap(db.row(query));
+		else
+			return -1;
+		return ((Risorsa)e).getValore();
 	}
 
 	@Override
 	public List<Entity> list() {
-		String query = read.replace("tabella","risorse").replace("where id = [id]", "");
+		String query = read.replace("tabella","risorse").replace("where id = ?", "");
 		return list(query);
 	}
 
