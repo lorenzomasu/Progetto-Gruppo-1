@@ -638,7 +638,7 @@ public class Main {
 						case "5"://5)Valore di una risorsa
 							System.out.println("Scrivere il nome della risorsa:");
 							r = a.valoreRisorsa(tastiera.nextLine());
-							if(r == 0)
+							if(r == -1)
 								sottorisposta = "Risorsa non trovata.";
 							else
 								sottorisposta = "Il valore della risorsa cercata e': " + r;
@@ -657,10 +657,10 @@ public class Main {
 						case "7"://7)Quantita' risorsa
 							System.out.println("Inserisci nome della risorsa:");
 							r = a.quantitaRisorsaImpero(tastiera.nextLine());
-							if(r == 0)
+							if(r == -1)
 								sottorisposta = "Risorsa non trovata.";
 							else
-								sottorisposta = "Valore della risorsa: " + r;
+								sottorisposta = "Quantita' della risorsa: " + r;
 							break;
 						case "8"://8)Popolazione totale impero
 							r = a.popolazioneTotaleImpero();
