@@ -13,7 +13,9 @@ import com.generation.entities.*;
  * la dob dell'essere non viene presa dal database in quanto la classe mapper non riesce a gestirla
  * nel caso di password errata del database da eccezione in quanto la classe database non la tira e non possiamo gestirla
  * 
- * 
+ * Bad stuff:
+ * il numero della tabella numeri ho dovuto lasciarlo autoincrement senno il metodo update di Database RETURN_GENERATED_KEYS non mi ritornava l'id modificato
+ * ho dovuto aggiungere la variabile numero in rubrica e renderla uguale all'id perche altrimenti il mapper, o il database, non ricordo, non riusciva a gestirlo e mi dava null
  */
 
 public class Main {
