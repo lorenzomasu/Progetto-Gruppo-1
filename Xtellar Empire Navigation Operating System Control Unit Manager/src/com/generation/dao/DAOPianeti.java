@@ -139,12 +139,9 @@ public class DAOPianeti implements IDAO, IDAOPianeti{
 			if(b.getCoordinate() == null || b.getCoordinate().length()!=20)
 				return "Coordinate pianeta errate.";
 			String ris = "";
-			for(int i=0;i<10;i++) {//ciclo delle lettere
-				if(a.getCoordinate().toCharArray()[i] - b.getCoordinate().toCharArray()[i]>='A')
-					ris += a.getCoordinate().toCharArray()[i] - b.getCoordinate().toCharArray()[i];
-				else
-					ris += 'A' + (a.getCoordinate().toCharArray()[i] - b.getCoordinate().toCharArray()[i]);
-			}
+			for(int i=0;i<10;i++) //ciclo delle lettere
+					ris += (char)('A' + Math.abs(a.getCoordinate().toCharArray()[i] - b.getCoordinate().toCharArray()[i]));
+			System.out.println(ris);
 			for(int i=10;i<20;i++) {
 				ris += String.valueOf(Math.abs(a.getCoordinate().toCharArray()[i] - b.getCoordinate().toCharArray()[i]));
 			}

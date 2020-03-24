@@ -331,21 +331,23 @@ public class Main {
 						try{
 							risorsa = new Risorsa();
 							if(sottoopzione.equals("2")){
-								System.out.println("Inserisci id pianeta:");
+								System.out.println("Inserisci id risorsa:");
 								risorsa.setId(Integer.parseInt(tastiera.nextLine()));
 								System.out.println("Nuovi dati:");
 							}
 							System.out.println("Inserisci nome risorsa:");
 							((Risorsa)risorsa).setNome(tastiera.nextLine());
 							System.out.println("Inserisci descrizione risorsa:");
+							((Risorsa)risorsa).setDescrizione(tastiera.nextLine());
+							System.out.println("Inserisci valore risorsa:");
 							((Risorsa)risorsa).setValore(Integer.parseInt(tastiera.nextLine()));
 							risorsa = a.modificaCreaRisorsa(risorsa);
 							if(risorsa == null)
 								sottorisposta = "Errore nei dati.";
 							else if(sottoopzione.equals("2"))
-								sottorisposta = "Pianeta modificato: " + risorsa.toString();
+								sottorisposta = "Risorsa modificato: " + risorsa.toString();
 							else 
-								sottorisposta = "Pianeta aggiunto: " + risorsa.toString();
+								sottorisposta = "Risorsa aggiunto: " + risorsa.toString();
 						} catch(Exception e) {
 							sottorisposta = "Errore nell'inserimento dati.";
 						}
@@ -630,10 +632,11 @@ public class Main {
 							sottorisposta = "Cognome con " + r + " ripetizioni.";
 							break;
 						case "4"://4)Valore medio delle risorse
-							if(a.valoreMedioRisorse() == 0)
+							double test = a.valoreMedioRisorse();
+							if(test == 0)
 								sottorisposta = "Risorse non trovate.";
 							else
-								sottorisposta = "Valore medio risorse dell'impero: " + a.valoreMedioRisorse();
+								sottorisposta = "Valore medio risorse dell'impero: " + test;
 							break;
 						case "5"://5)Valore di una risorsa
 							System.out.println("Scrivere il nome della risorsa:");

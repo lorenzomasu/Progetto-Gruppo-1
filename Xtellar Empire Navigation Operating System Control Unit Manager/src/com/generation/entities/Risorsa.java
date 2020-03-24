@@ -45,6 +45,11 @@ public class Risorsa extends Entity implements IRisorsa{
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	@Override
+	public String toString() {
+		return "ID: " + getId() + "\nnome: " + nome + ", \ndescrizione: " + descrizione + ", \nvalore: " + valore;
+	}
 	
 	
 	

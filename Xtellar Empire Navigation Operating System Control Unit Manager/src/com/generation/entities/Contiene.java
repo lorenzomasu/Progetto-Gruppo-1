@@ -5,23 +5,23 @@ import java.math.BigInteger;
 import com.generation.base.Entity;
 
 public class Contiene extends Entity {
-	private int idrisorsa, quantita;
+	private int idrisorse, quantita;
 
 	public Contiene(int idrisorsa, int quantita) {
 		super();
-		this.idrisorsa = idrisorsa;
+		this.idrisorse = idrisorsa;
 		this.quantita = quantita;
 	}
 
 	public Contiene() {}
 	
 	
-	public int getIdrisorsa() {
-		return idrisorsa;
+	public int getIdrisorse() {
+		return idrisorse;
 	}
 
-	public void setIdrisorsa(int idrisorsa) {
-		this.idrisorsa = idrisorsa;
+	public void setIdrisorse(int idrisorsa) {
+		this.idrisorse = idrisorsa;
 	}
 
 	public int getQuantita() {
@@ -45,5 +45,11 @@ public class Contiene extends Entity {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	@Override
+	public String toString() {
+		return "idpianeta: " + getId() + "\nidrisorsa: " + idrisorse + ", \nquantita: " + quantita;
+	}
+	
 	
 }

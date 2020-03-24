@@ -97,7 +97,7 @@ public class DAORubrica implements IDAO, IDAORubrica{
 	@Override
 	public Entity load(BigInteger id) {
 		try {
-			String query = read.replace("tabella","rubrica").replace("?",id+"");
+			String query = read.replace("tabella","rubrica").replace("id = ?", "numero = " + id+"");
 			Entity e = new Rubrica();
 			e.fromMap(db.row(query));
 			return e;
@@ -116,13 +116,14 @@ public class DAORubrica implements IDAO, IDAORubrica{
 		try {
 			Entity ris = null;
 			String query = "";
-			
 			if(e.getId() != null)
-				query = update.replace("tabella", "rubrica").replace("[id]",e.getId()+"");
+				query = update.replace("tabella", "rubrica").replace("id = [id]","numero = " + e.getId()+"");
 			else
 				query = insert.replace("tabella", "rubrica");
-			
 			Map<String, String> mappa = e.toMap();
+			if(e.getId() != null) 
+				mappa.put("numero", mappa.get("id"));
+			mappa.remove("id");
 			BigInteger id = db.update(query,mappa);
 			if(e.getId()==null)
 				ris = load(id);
@@ -140,7 +141,7 @@ public class DAORubrica implements IDAO, IDAORubrica{
 	 */
 	@Override
 	public boolean delete(BigInteger id) {
-		String query = delete.replace("tabella", "rubrica").replace("[id]",id+"");
+		String query = delete.replace("tabella", "rubrica").replace("id = [id]","numero = " + id+"");
 		BigInteger ris = db.update(query);
 		return ris == null; 
 	}

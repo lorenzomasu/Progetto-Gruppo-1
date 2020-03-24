@@ -125,20 +125,21 @@ public class Aggregator implements IAggregator{
 		return ((DAORisorse) getInstance().get("daorisorse")).delete(BigInteger.valueOf(id));
 	}
 	
+	
 	public Entity modificaRisorsaAPianeta(int idpianeta, int idrisorsadamodificare, int idrisorsanuova) {
 		Map<String, String> e = new HashMap<String,String>();
 		e.put("idpianeta", idpianeta+"");
-		e.put("idrisorsa", idrisorsadamodificare+"");
+		e.put("idrisorse", idrisorsadamodificare+"");
 		Map<String, String> modifica = new HashMap<String,String>();
 		modifica.put("idpianeta", idpianeta+"");
-		modifica.put("idrisorsa", idrisorsanuova+"");
+		modifica.put("idrisorse", idrisorsanuova+"");
 		return ((DAOContiene)getInstance().get("daocontiene")).load(e, modifica);
 	}
 	
 	public Entity aggiungiRisorsaAPianeta(int idpianeta, int idrisorsa, int quantita) {
 		Map<String, String> e = new HashMap<String,String>();
 		e.put("idpianeta", idpianeta+"");
-		e.put("idrisorsa", idrisorsa+"");
+		e.put("idrisorse", idrisorsa+"");
 		e.put("quantita", quantita+"");
 		return ((DAOContiene)getInstance().get("daocontiene")).load(e, null);
 	}
@@ -349,7 +350,7 @@ public class Aggregator implements IAggregator{
 			return "Nessun numero trovato.";
 		Pianeta p = (Pianeta) ((DAOPianeti) getInstance().get("daopianeti")).load(BigInteger.valueOf(essere.getIdpianeta()));
 		Razza r = (Razza) ((DAORazze)getInstance().get("daorazze")).load(BigInteger.valueOf(essere.getIdrazza()));
-		return p.toString() +", " + cittaDelNumero(numero) + ", " + indirizzoDelNumero(numero) + ", " + r.toString() + ", " + essere.toString();
+		return p.toString() +"\n" + cittaDelNumero(numero) + ", " + indirizzoDelNumero(numero) + "\n" + r.toString() + "\n" + essere.toString();
 	}
 
 	/**
@@ -360,7 +361,6 @@ public class Aggregator implements IAggregator{
 	
 	@Override
 	public int quantitaRisorsaImpero(String nomeRisorsa) {
-		List<Entity> contiene = ((DAOContiene)getInstance().get("daocontiene")).list();
 		List<Entity> risorse = ((DAORisorse)getInstance().get("daorisorse")).list();
 		int id = -1;
 		if(risorse == null || risorse.isEmpty())
@@ -373,12 +373,14 @@ public class Aggregator implements IAggregator{
 		}
 		if(id == -1)
 			return -1;
-		int tot = 0;
+		List<Entity> contiene = ((DAOContiene)getInstance().get("daocontiene")).list();
 		if(contiene == null || contiene.isEmpty())
 			return 0;
+		int tot = 0;
 		for(Entity e : contiene) {
-			if(((Contiene)e).getIdrisorsa() == id)
+			if(((Contiene)e).getIdrisorse() == id)
 				tot += ((Contiene)e).getQuantita();
+			System.out.println("quantita risorsa aggregator: " + e.toString());
 		}
 		return tot;
 	}
@@ -398,7 +400,7 @@ public class Aggregator implements IAggregator{
 	 */
 	@Override
 	public String distanzaPianeti(String nomea, String nomeb) {
-		return  ((DAOPianeti)getInstance().get("daopianeti")).distanzaPianeti(nomea, nomeb) ;
+		return  ((DAOPianeti)getInstance().get("daopianeti")).distanzaPianeti(nomea, nomeb);
 	}
 
 	/**
@@ -546,15 +548,15 @@ public class Aggregator implements IAggregator{
 		Map<Integer, Integer> mappa = new HashMap<Integer, Integer>();
 		
 		for(Entity e : contiene) {
-			if(mappa.get(((Contiene)e).getIdrisorsa()) == null)
-				mappa.put(((Contiene)e).getIdrisorsa(), 0);
+			if(mappa.get(((Contiene)e).getIdrisorse()) == null)
+				mappa.put(((Contiene)e).getIdrisorse(), 0);
 			else
-				mappa.put(((Contiene)e).getIdrisorsa(), mappa.get(((Contiene)e).getIdrisorsa()) + ((Contiene)e).getQuantita());
+				mappa.put(((Contiene)e).getIdrisorse(), mappa.get(((Contiene)e).getIdrisorse()) + ((Contiene)e).getQuantita());
 		}
 		if(mappa.isEmpty())
 			return null;
 		List<Risorsa> ris = new ArrayList<Risorsa>();
-		int tot=0;
+		int tot=Integer.MIN_VALUE;
 		for(Integer i : mappa.keySet()) {
 			if(tot<=mappa.get(i)) {
 				Risorsa r = new Risorsa();
@@ -568,8 +570,11 @@ public class Aggregator implements IAggregator{
 				}
 			}
 		}
-		for(Risorsa r : ris) {
-			r = (Risorsa)((DAORisorse)getInstance().get("daorisorse")).load(r.getId());
+		for(int i=0;i<ris.size();i++) {
+			Risorsa supp = ris.get(i);
+			supp = (Risorsa)((DAORisorse)getInstance().get("daorisorse")).load(supp.getId());
+			ris.remove(i);
+			ris.add(supp);
 		}
 		return ris;
 	}
@@ -595,7 +600,7 @@ public class Aggregator implements IAggregator{
 		List<Entity> risorsa = ((DAOContiene)getInstance().get("daocontiene")).risorseSuPianeta(pia);
 		List<Risorsa> risorse = new ArrayList<Risorsa>();
 		for(Entity e : risorsa){
-			risorse.add((Risorsa)((DAORisorse)getInstance().get("daorisorse")).load(BigInteger.valueOf(((Contiene)e).getIdrisorsa())));
+			risorse.add((Risorsa)((DAORisorse)getInstance().get("daorisorse")).load(BigInteger.valueOf(((Contiene)e).getIdrisorse())));
 		}
 		return risorse;
 	}

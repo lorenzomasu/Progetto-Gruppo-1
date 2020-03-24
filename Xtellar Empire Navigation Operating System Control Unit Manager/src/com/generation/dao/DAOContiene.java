@@ -64,7 +64,7 @@ public class DAOContiene implements IDAO, IDAOContiene{
 	 */
 	public List<Entity> searchRisorsa(BigInteger idRisorsa) {
 		List<Entity> valori = new ArrayList<Entity>();
-		List<Map<String,String>> f = db.rows(read.replace("tabella",nometabella).replace("id = ?;", "idrisorsa = " + idRisorsa));
+		List<Map<String,String>> f = db.rows(read.replace("tabella",nometabella).replace("id = ?;", "idrisorse = " + idRisorsa));
 		for(Map<String, String> map : f) {
 			Entity e = new Contiene();
 			e.fromMap(map);
@@ -89,6 +89,12 @@ public class DAOContiene implements IDAO, IDAOContiene{
 		return valori;
 	}
 	
+	public Entity searchRow(BigInteger idPianeta, BigInteger idrisorsa) {
+		Map<String,String> f = db.row(read.replace("tabella",nometabella).replace("id = ?;", "idpianeta = " + idPianeta + " and idrisorse = " + idrisorsa));
+		Entity e = new Contiene();
+		e.fromMap(f);
+		return e;
+	}
 	
 	@Override
 	@Deprecated
@@ -109,7 +115,7 @@ public class DAOContiene implements IDAO, IDAOContiene{
 	 * @author Ivan Capra
 	 */
 	public boolean deleteRisorsa(BigInteger id) {
-		return db.update(delete.replace("tabella", nometabella).replace("id = [id]", "idrisorsa = " + id+"")) == null;
+		return db.update(delete.replace("tabella", nometabella).replace("id = [id]", "idrisorse = " + id+"")) == null;
 	}
 	/**
 	 * cancello il pianeta nella tabella contiene
@@ -128,7 +134,7 @@ public class DAOContiene implements IDAO, IDAOContiene{
 	 * @author Ivan Capra
 	 */
 	public boolean deleteRisorsaDaPianeta(BigInteger idpianeta, BigInteger idrisorsa) {
-		return db.update(delete.replace("tabella", nometabella).replace("id = [id]", "idpianeta = " + idpianeta+"" + " and idrisorsa = " + idrisorsa+"")) == null;
+		return db.update(delete.replace("tabella", nometabella).replace("id = [id]", "idpianeta = " + idpianeta+"" + " and idrisorse = " + idrisorsa+"")) == null;
 	}
 	
 	/**
@@ -139,17 +145,24 @@ public class DAOContiene implements IDAO, IDAOContiene{
 	 * @author Ivan Capra
 	 */
 	public Entity load(Map<String, String> e, Map<String,String> modifiche) {
-		BigInteger id = null;
-		String query="";
-		if(e.get("idpianeta")!=null && e.get("idrisorse")!=null && modifiche!=null) { // la mia entity esiste gia nel db
-			query = update.replace("tabella", nometabella).replace("id = [id];", "idpianeta = " + e.get("idpianeta") + " and idrisorsa = " + e.get("idrisorsa"));
-			id = db.update(query, modifiche);
+		try {
+			BigInteger id = null;
+			String query="";
+			if(e.get("idpianeta")!=null && e.get("idrisorse")!=null && modifiche!=null) { // la mia entity esiste gia nel db
+				query = update.replace("tabella", nometabella).replace("id = [id];", "idpianeta = " + e.get("idpianeta") + " and idrisorse = " + e.get("idrisorse"));
+				id = db.update(query, modifiche);
+			}
+			else if(e.get("idpianeta")!=null && e.get("idrisorse")!=null && modifiche==null){
+				query = insert.replace("tabella", nometabella);
+				id = db.update(query, e);
+			}
+			if(modifiche == null)
+				return searchRow(BigInteger.valueOf(Long.valueOf(e.get("idpianeta"))), BigInteger.valueOf(Long.valueOf(e.get("idrisorse"))));
+			else
+				return searchRow(BigInteger.valueOf(Long.valueOf(modifiche.get("idpianeta"))), BigInteger.valueOf(Long.valueOf(modifiche.get("idrisorse"))));
+		}catch(Exception exc) {
+			return null;
 		}
-		else if(e.get("idpianeta")!=null && e.get("idrisorse")!=null && modifiche==null){
-			query = insert.replace("tabella", nometabella);
-			id = db.update(query, e);
-		}
-		return searchRisorsa(id).get(0);
 	}
 
 	
@@ -159,7 +172,7 @@ public class DAOContiene implements IDAO, IDAOContiene{
 	 */
 	@Override
 	public List<Entity> pianetiConRisorsa(Risorsa r) {
-		String query = read.replace("tabella", nometabella).replace("id = ?;", "idrisorsa = " + r.getId());
+		String query = read.replace("tabella", nometabella).replace("id = ?;", "idrisorse = " + r.getId());
 		return list(query);
 	}
 

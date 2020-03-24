@@ -27,7 +27,7 @@ public class DAORisorse implements IDAO, IDAORisorse{
 	public double valoreMedioRisorse() {
 		String query = read.replace("*", "avg(valore) valMedio").replace("tabella", "risorse").replace("where id = ?", ""); 
 		Map<String,String> test = db.row(query);
-		if(test!=null && test.get("media")!=null)
+		if(test!=null && test.get("valMedio")!=null)
 			return Double.parseDouble(db.row(query).get("valMedio"));
 		else
 			return 0;
@@ -42,7 +42,7 @@ public class DAORisorse implements IDAO, IDAORisorse{
 		String query = read.replace("*", "valore").replace("tabella", "risorse").replace("id = ?", "nome = '" + nomeRisorsa + "'");
 		Entity e = new Risorsa();
 		Map<String,String> test = db.row(query);
-		if(test!=null && test.get("media")!=null)
+		if(test!=null && test.get("valore")!=null)
 			e.fromMap(db.row(query));
 		else
 			return -1;
@@ -108,7 +108,6 @@ public class DAORisorse implements IDAO, IDAORisorse{
 				query = update.replace("tabella", "risorse").replace("[id]",e.getId()+"");
 			else
 				query = insert.replace("tabella", "risorse");
-			
 			Map<String, String> mappa = e.toMap();
 			BigInteger id = db.update(query,mappa);
 			if(e.getId()==null)
